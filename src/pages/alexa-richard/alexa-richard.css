@@ -547,6 +547,50 @@
   }
 }
 
+/* ─── Hero centre-text container ─────────────────────────────────────── */
+.ar-hero-content {
+  padding: 0 1.5rem;
+}
+
+/* ─── Hero Portraits — frameless transparent cutouts, sides of banner ── */
+.ar-portrait-img {
+  height: 360px;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  display: block;
+  filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.6));
+}
+
+.ar-portrait-label {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(232, 186, 163, 0.75);
+  text-align: center;
+  margin-top: 0.5rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+/* Hide on screens where there's no room to flank centre text */
+@media (max-width: 860px) {
+  .ar-portrait-img  { height: 240px; }
+}
+
+@media (max-width: 640px) {
+  .ar-portrait-img  { height: 160px; }
+  .ar-portrait-label { font-size: 0.8rem; }
+}
+
+@media (max-width: 400px) {
+  .ar-portrait-img  { height: 120px; }
+  .ar-portrait-label { font-size: 0.72rem; }
+}
+
+
 /* ─── Footer caricature ──────────────────────────────────────────────── */
 .ar-footer-caricature {
   height: 500px;
