@@ -164,7 +164,7 @@ export default function VenueSection() {
               Accommodation
             </h4>
             <p style={{ fontSize: '0.9rem', lineHeight: 1.8, color: 'var(--ar-text-muted)' }}>
-              A room block has been reserved at <strong style={{ color: 'var(--ar-green)' }}>Hotel Sacher Vienna</strong> for our guests. Please book before <strong>August 15, 2025</strong> using code <strong style={{ color: 'var(--ar-gold)' }}>ALEXA-RICHARD-2025</strong> for a special rate.
+              A room block has been reserved at <strong style={{ color: 'var(--ar-green)' }}>Hotel Sacher Vienna</strong> for our guests. Please book before <strong>May 1, 2026</strong> using code <strong style={{ color: 'var(--ar-gold)' }}>ALEXA-RICHARD-2026</strong> for a special rate.
             </p>
           </div>
         </motion.div>

@@ -85,7 +85,7 @@ export default function RSVPSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            Kindly Reply By August 1, 2025
+            Kindly Reply By April 1, 2026
           </motion.span>
           <motion.h2
             className="ar-heading"

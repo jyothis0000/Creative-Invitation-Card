@@ -180,7 +180,7 @@ export default function HeroSection() {
             color: '#C9A84C',
             fontWeight: 700,
           }}>
-            September 14, 2025
+            May 24, 2026
           </span>
           <span style={{ color: 'rgba(201,168,76,0.4)', fontSize: '0.8rem' }}>◆</span>
           <span style={{
@@ -195,7 +195,7 @@ export default function HeroSection() {
         </motion.div>
 
         {/* RSVP CTA */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.55 }}
@@ -205,11 +205,11 @@ export default function HeroSection() {
           <a href="#ar-story" className="ar-btn" style={{ borderColor: 'rgba(201,168,76,0.4)', color: '#E8BAA3' }}>
             Our Story
           </a>
-        </motion.div>
+        </motion.div> */}
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
+      {/* <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
         onClick={() => document.getElementById('ar-countdown')?.scrollIntoView({ behavior: 'smooth' })}
@@ -225,7 +225,7 @@ export default function HeroSection() {
             <animateMotion dur="1.8s" repeatCount="indefinite" path="M0,0 L0,20" />
           </circle>
         </svg>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }

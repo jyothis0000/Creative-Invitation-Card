@@ -192,18 +192,41 @@
   }
 }
 
-/* ─── Countdown Tiles ─────────────────────────────────────────────────── */
-.ar-countdown-tile {
-  background: var(--ar-green);
-  color: var(--ar-cream);
-  padding: 1.25rem 1.5rem;
-  min-width: 90px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+/* ─── Scratch Card Tiles ─────────────────────────────────────────────── */
+.ar-scratch-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: nowrap;
 }
 
-.ar-countdown-tile::before {
+.ar-scratch-group {
+  display: flex;
+  align-items: center;
+}
+
+.ar-scratch-tile {
+  width: 120px;
+  height: 120px;
+  background: var(--ar-green);
+  overflow: visible;       /* allow celebration burst to spill out */
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+}
+
+.ar-scratch-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--ar-green);
+}
+
+.ar-scratch-back::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -211,23 +234,38 @@
   pointer-events: none;
 }
 
+.ar-scratch-sep {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--ar-gold);
+  padding: 0 0.3rem;
+  margin-bottom: 1.2rem;
+  flex-shrink: 0;
+  user-select: none;
+  line-height: 1;
+}
+
 .ar-countdown-num {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 600;
   line-height: 1;
   color: var(--ar-gold);
   display: block;
+  position: relative;
+  z-index: 1;
 }
 
 .ar-countdown-label {
   font-family: 'Lato', sans-serif;
-  font-size: 0.55rem;
-  letter-spacing: 0.3em;
+  font-size: 0.5rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--ar-blush);
   margin-top: 0.4rem;
   display: block;
+  position: relative;
+  z-index: 1;
 }
 
 /* ─── Event Cards ─────────────────────────────────────────────────────── */
@@ -408,22 +446,45 @@
     grid-row: span 1;
   }
 
-  .ar-countdown-tile {
-    min-width: 68px;
-    padding: 1rem;
-  }
-
   .ar-event-card {
-    padding: 1.5rem 1.25rem;
+    padding: 1.5rem 1rem;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile — single horizontal line for scratch tiles */
+@media (max-width: 520px) {
+  .ar-scratch-tile {
+    width: 72px;
+    height: 72px;
+  }
 
-  /* .ar-gallery-grid {
-    grid-template-columns: 1fr 1fr;
-  } */
+  .ar-scratch-sep {
+    font-size: 1.4rem;
+    padding: 0 0.15rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .ar-countdown-num {
+    font-size: 1.6rem;
+  }
+
+  .ar-countdown-label {
+    font-size: 0.42rem;
+    letter-spacing: 0.15em;
+  }
+
   .ar-section {
     padding: 4rem 1rem;
   }
 }
+
+@media (max-width: 360px) {
+  .ar-scratch-tile {
+    width: 60px;
+    height: 60px;
+  }
+
+  .ar-countdown-num {
+    font-size: 1.3rem;
+  }
+}

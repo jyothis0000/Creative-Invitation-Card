@@ -86,7 +86,7 @@ export default function EventsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            September 14, 2025
+            May 24, 2026
           </motion.span>
           <motion.h2
             className="ar-heading"

@@ -118,7 +118,7 @@ export default function FooterSection() {
             color: '#C9A84C',
             marginBottom: '0.5rem',
           }}>
-            September 14, 2025 — Vienna, Austria
+            May 24, 2026 — Vienna, Austria
           </p>
           <p style={{
             fontFamily: "'Cormorant Garamond', serif",
