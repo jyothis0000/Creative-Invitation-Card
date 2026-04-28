@@ -3,14 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import FloralDivider from './FloralDivider';
 
 const RSVP_OPTIONS = [
-  { value: 'yes',   emoji: '🥂', label: 'Yes, I will attend!' },
-  { value: 'no',    emoji: '😔', label: "Unfortunately, I can't" },
-  { value: 'later', emoji: '⏳', label: "I'll tell you a bit later" },
+  { value: 'yes', emoji: '🥂', label: 'Yes, I will attend!' },
+  { value: 'no', emoji: '😔', label: "Unfortunately, I can't" },
+  // { value: 'later', emoji: '⏳', label: "I'll tell you a bit later" },
 ];
 
 /* Confetti burst */
 function Confetti() {
-  const colors = ['#C9A84C','#1B3A2D','#E8BAA3','#C48D77','#FAF7F2','#3E7558'];
+  const colors = ['#C9A84C', '#1B3A2D', '#E8BAA3', '#C48D77', '#FAF7F2', '#3E7558'];
   const pieces = Array.from({ length: 40 }, (_, i) => ({
     left: `${Math.random() * 100}%`,
     color: colors[i % colors.length],
@@ -42,17 +42,24 @@ function Confetti() {
 
 export default function RSVPSection() {
   const [selected, setSelected] = useState(null);
-  const [form, setForm]         = useState({ name: '', email: '', message: '' });
-  const [flying, setFlying]     = useState(false);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', guests: 1 });
+  const [flying, setFlying] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  function handleChange(e) {
-    setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  function openPopup(value) {
+    setSelected(value);
+    setPopupOpen(true);
+  }
+
+  function closePopup() {
+    setPopupOpen(false);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!selected) return;
+    setPopupOpen(false);
     setFlying(true);
     setTimeout(() => { setFlying(false); setSubmitted(true); }, 1200);
   }
@@ -102,129 +109,44 @@ export default function RSVPSection() {
 
         <AnimatePresence mode="wait">
           {!submitted ? (
-            <motion.form
-              key="form"
-              onSubmit={handleSubmit}
+            <motion.div
+              key="options"
               initial={{ opacity: 1 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
             >
-              {/* RSVP selection */}
+              <p className="ar-label" style={{ textAlign: 'center', marginBottom: '1rem' }}>
+                Your Response
+              </p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: 0.2 }}
+                style={{ display: 'grid', gap: '0.75rem' }}
               >
-                <p className="ar-label" style={{ textAlign: 'center', marginBottom: '1rem' }}>
-                  Your Response
-                </p>
-                <div style={{ display: 'grid', gap: '0.75rem', marginBottom: '2rem' }}>
-                  {RSVP_OPTIONS.map(opt => (
-                    <button
-                      key={opt.value}
-                      type="button"
-                      className={`ar-rsvp-option${selected === opt.value ? ' selected' : ''}`}
-                      onClick={() => setSelected(opt.value)}
-                    >
-                      <div className="ar-rsvp-dot" />
-                      <span style={{ fontSize: '1.2rem' }}>{opt.emoji}</span>
-                      <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem' }}>
-                        {opt.label}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Fields — shown only when Yes or Maybe */}
-              <AnimatePresence>
-                {selected && selected !== 'no' && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.4 }}
-                    style={{ overflow: 'hidden' }}
-                  >
-                    <div style={{ display: 'grid', gap: '1.25rem', paddingTop: '0.5rem' }}>
-                      <div>
-                        <label className="ar-label" htmlFor="ar-name">Your Name</label>
-                        <input
-                          id="ar-name" name="name" type="text"
-                          value={form.name} onChange={handleChange}
-                          className="ar-input" required
-                          placeholder="Alexa & Richard's dearest guest"
-                        />
-                      </div>
-                      <div>
-                        <label className="ar-label" htmlFor="ar-email">Email Address</label>
-                        <input
-                          id="ar-email" name="email" type="email"
-                          value={form.email} onChange={handleChange}
-                          className="ar-input"
-                          placeholder="your@email.com"
-                        />
-                      </div>
-                      <div>
-                        <label className="ar-label" htmlFor="ar-message">A Note for the Couple</label>
-                        <textarea
-                          id="ar-message" name="message"
-                          value={form.message} onChange={handleChange}
-                          rows={4}
-                          className="ar-input"
-                          style={{ resize: 'vertical' }}
-                          placeholder="Share your wishes and love..."
-                        />
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Name field for "No" option */}
-              <AnimatePresence>
-                {selected === 'no' && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.4 }}
-                    style={{ overflow: 'hidden' }}
-                  >
-                    <div style={{ paddingTop: '0.5rem' }}>
-                      <label className="ar-label" htmlFor="ar-name-no">Your Name</label>
-                      <input
-                        id="ar-name-no" name="name" type="text"
-                        value={form.name} onChange={handleChange}
-                        className="ar-input"
-                        placeholder="So we can send you a warm wish"
-                      />
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Submit */}
-              {selected && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  style={{ marginTop: '2rem', textAlign: 'center' }}
-                >
+                {RSVP_OPTIONS.map((opt, i) => (
                   <motion.button
-                    type="submit"
-                    className="ar-btn ar-btn--solid"
-                    whileHover={{ scale: 1.02 }}
+                    key={opt.value}
+                    type="button"
+                    className={`ar-rsvp-option${selected === opt.value ? ' selected' : ''}`}
+                    onClick={() => openPopup(opt.value)}
+                    initial={{ opacity: 0, x: -24 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.15 * i }}
+                    whileHover={{ scale: 1.02, x: 4 }}
                     whileTap={{ scale: 0.97 }}
-                    style={{ fontSize: '0.75rem', letterSpacing: '0.25em' }}
                   >
-                    Send My RSVP 💌
+                    <div className="ar-rsvp-dot" />
+                    <span style={{ fontSize: '1.2rem' }}>{opt.emoji}</span>
+                    <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem' }}>
+                      {opt.label}
+                    </span>
                   </motion.button>
-                </motion.div>
-              )}
-            </motion.form>
+                ))}
+              </motion.div>
+            </motion.div>
           ) : (
             <motion.div
               key="success"
@@ -257,8 +179,8 @@ export default function RSVPSection() {
                 {selected === 'yes'
                   ? "We can't wait to celebrate with you!"
                   : selected === 'no'
-                  ? "We'll miss you dearly — we'll think of you on the day."
-                  : "Take your time — we'll be here whenever you're ready."}
+                    ? "We'll miss you dearly — we'll think of you on the day."
+                    : "Take your time — we'll be here whenever you're ready."}
               </p>
               <p style={{ fontSize: '0.85rem', color: 'var(--ar-text-muted)' }}>
                 — Alexa & Richard
@@ -267,6 +189,133 @@ export default function RSVPSection() {
           )}
         </AnimatePresence>
       </div>
+
+      {/* ── Popup Modal ── */}
+      <AnimatePresence>
+        {popupOpen && (
+          <motion.div
+            className="ar-popup-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={closePopup}
+          >
+            {/* Panel — child of backdrop so flex centering works */}
+            <motion.div
+              className="ar-popup"
+              initial={{ opacity: 0, scale: 0.88, y: 40 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.88, y: 40 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              role="dialog"
+              aria-modal="true"
+              onClick={e => e.stopPropagation()}
+            >
+              {/* Close */}
+              <button
+                type="button"
+                className="ar-popup-close"
+                onClick={closePopup}
+                aria-label="Close"
+              >
+                ×
+              </button>
+
+              {/* Selected option badge */}
+              {/* <div className="ar-popup-badge">
+                <span style={{ fontSize: '1.6rem' }}>
+                  {RSVP_OPTIONS.find(o => o.value === selected)?.emoji}
+                </span>
+                <span style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontStyle: 'italic',
+                  fontSize: '1.05rem',
+                  color: 'var(--ar-text-muted)',
+                }}>
+                  {RSVP_OPTIONS.find(o => o.value === selected)?.label}
+                </span>
+              </div> */}
+              <label className="ar-label">Number of Guests</label>
+
+
+              <FloralDivider style={{ margin: '1.25rem 0' }} />
+
+              <form onSubmit={handleSubmit}>
+                <div style={{ display: 'grid', gap: '1.25rem' }}>
+
+
+                  {selected !== 'no' && (
+                    <>
+                      {/* <div>
+                        <label className="ar-label" htmlFor="ar-email">Email Address</label>
+                        <input
+                          id="ar-email" name="email" type="email"
+                          value={form.email} onChange={handleChange}
+                          className="ar-input"
+                          placeholder="your@email.com"
+                        />
+                      </div> */}
+
+                      <div>
+                        <div style={{
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          gap: '1.25rem', marginTop: '0.5rem',
+                        }}>
+                          <motion.button
+                            type="button"
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => setForm(f => ({ ...f, guests: Math.max(1, f.guests - 1) }))}
+                            style={{
+                              width: '2.5rem', height: '2.5rem',
+                              borderRadius: '50%', border: '1.5px solid var(--ar-gold)',
+                              background: 'transparent', color: 'var(--ar-gold)',
+                              fontSize: '1.4rem', lineHeight: 1,
+                              cursor: 'pointer', display: 'flex',
+                              alignItems: 'center', justifyContent: 'center',
+                            }}
+                          >−</motion.button>
+                          <span style={{
+                            fontFamily: 'var(--ar-serif)', fontSize: '1.75rem',
+                            color: 'var(--ar-forest)', minWidth: '2rem', textAlign: 'center',
+                          }}>
+                            {form.guests}
+                          </span>
+                          <motion.button
+                            type="button"
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => setForm(f => ({ ...f, guests: Math.min(10, f.guests + 1) }))}
+                            style={{
+                              width: '2.5rem', height: '2.5rem',
+                              borderRadius: '50%', border: '1.5px solid var(--ar-gold)',
+                              background: 'var(--ar-gold)', color: '#fff',
+                              fontSize: '1.4rem', lineHeight: 1,
+                              cursor: 'pointer', display: 'flex',
+                              alignItems: 'center', justifyContent: 'center',
+                            }}
+                          >+</motion.button>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                <div style={{ marginTop: '1.75rem', textAlign: 'center' }}>
+                  <motion.button
+                    type="submit"
+                    className="ar-btn ar-btn--solid"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.97 }}
+                    style={{ fontSize: '0.75rem', letterSpacing: '0.25em', width: '100%' }}
+                  >
+                    Send My RSVP 💌
+                  </motion.button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
