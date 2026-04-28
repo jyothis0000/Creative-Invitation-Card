@@ -51,8 +51,8 @@ export default function VenueSection() {
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
                   </svg>
                 </div>
                 <span className="ar-eyebrow" style={{ margin: 0 }}>Ceremony</span>
@@ -80,8 +80,8 @@ export default function VenueSection() {
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2">
-                    <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/>
-                    <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6"/>
+                    <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9" />
+                    <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6" />
                   </svg>
                 </div>
                 <span className="ar-eyebrow" style={{ margin: 0 }}>Reception</span>
@@ -139,7 +139,7 @@ export default function VenueSection() {
         </div>
 
         {/* Accommodation note */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -167,7 +167,7 @@ export default function VenueSection() {
               A room block has been reserved at <strong style={{ color: 'var(--ar-green)' }}>Hotel Sacher Vienna</strong> for our guests. Please book before <strong>May 1, 2026</strong> using code <strong style={{ color: 'var(--ar-gold)' }}>ALEXA-RICHARD-2026</strong> for a special rate.
             </p>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

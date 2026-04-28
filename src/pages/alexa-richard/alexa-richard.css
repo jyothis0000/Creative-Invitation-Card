@@ -546,3 +546,21 @@
     font-size: 1.3rem;
   }
 }
+
+/* ─── Footer caricature ──────────────────────────────────────────────── */
+.ar-footer-caricature {
+  height: 500px;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .ar-footer-caricature {
+    height: 240px;
+  }
+}
+
+@media (max-width: 400px) {
+  .ar-footer-caricature {
+    height: 180px;
+  }
+}
