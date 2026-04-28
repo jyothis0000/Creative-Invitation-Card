@@ -1,7 +1,8 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import EnvelopeIntro from './components/EnvelopeIntro';
 import Hero from './components/Hero';
 
+// ─── Existing Kerala Invitation (lazy) ─────────────────────────
 const SaveTheDate    = lazy(() => import('./components/SaveTheDate'));
 const CoupleStory    = lazy(() => import('./components/CoupleStory'));
 const BulletRideScene = lazy(() => import('./components/BulletRideScene'));
@@ -10,6 +11,9 @@ const PhotoGallery   = lazy(() => import('./components/PhotoGallery'));
 const RSVPForm       = lazy(() => import('./components/RSVPForm'));
 const VenueMap       = lazy(() => import('./components/VenueMap'));
 const Footer         = lazy(() => import('./components/Footer'));
+
+// ─── New Alexa & Richard Card ───────────────────────────────────
+const AlexaRichardCard = lazy(() => import('./pages/AlexaRichardCard'));
 
 function SectionLoader() {
   return (
@@ -43,54 +47,58 @@ function MusicToggle() {
   );
 }
 
-export default function App() {
+// ─── Kerala Invitation Page ─────────────────────────────────────
+function KeralaInvitation() {
   const [showMain, setShowMain] = useState(false);
-
   return (
     <>
       <MusicToggle />
-
-      {/* Envelope intro — runs once per session */}
       <EnvelopeIntro onDone={() => setShowMain(true)} />
-
-      {/* Main site — fades in after envelope */}
       {showMain && (
         <main>
           <Hero />
-
-          <Suspense fallback={<SectionLoader />}>
-            <SaveTheDate />
-          </Suspense>
-
-          <Suspense fallback={<SectionLoader />}>
-            <CoupleStory />
-          </Suspense>
-
-          <Suspense fallback={<SectionLoader />}>
-            <BulletRideScene />
-          </Suspense>
-
-          <Suspense fallback={<SectionLoader />}>
-            <WeddingEvents />
-          </Suspense>
-
-          <Suspense fallback={<SectionLoader />}>
-            <PhotoGallery />
-          </Suspense>
-
-          <Suspense fallback={<SectionLoader />}>
-            <RSVPForm />
-          </Suspense>
-
-          <Suspense fallback={<SectionLoader />}>
-            <VenueMap />
-          </Suspense>
-
-          <Suspense fallback={<SectionLoader />}>
-            <Footer />
-          </Suspense>
+          <Suspense fallback={<SectionLoader />}><SaveTheDate /></Suspense>
+          <Suspense fallback={<SectionLoader />}><CoupleStory /></Suspense>
+          <Suspense fallback={<SectionLoader />}><BulletRideScene /></Suspense>
+          <Suspense fallback={<SectionLoader />}><WeddingEvents /></Suspense>
+          <Suspense fallback={<SectionLoader />}><PhotoGallery /></Suspense>
+          <Suspense fallback={<SectionLoader />}><RSVPForm /></Suspense>
+          <Suspense fallback={<SectionLoader />}><VenueMap /></Suspense>
+          <Suspense fallback={<SectionLoader />}><Footer /></Suspense>
         </main>
       )}
     </>
   );
+}
+
+// ─── Tiny Hash Router — no external deps ───────────────────────
+function useHashRoute() {
+  const getRoute = () => {
+    const hash = window.location.hash; // e.g. "#/template6"
+    const path = hash.replace(/^#/, '') || '/';
+    return path;
+  };
+  const [route, setRoute] = useState(getRoute);
+  useEffect(() => {
+    const handler = () => setRoute(getRoute());
+    window.addEventListener('hashchange', handler);
+    return () => window.removeEventListener('hashchange', handler);
+  }, []);
+  return route;
+}
+
+// ─── Root App ───────────────────────────────────────────────────
+export default function App() {
+  const route = useHashRoute();
+  const isTemplate6 = route === '/template6' || route.startsWith('/template6');
+
+  if (isTemplate6) {
+    return (
+      <Suspense fallback={<SectionLoader />}>
+        <AlexaRichardCard />
+      </Suspense>
+    );
+  }
+
+  return <KeralaInvitation />;
 }
