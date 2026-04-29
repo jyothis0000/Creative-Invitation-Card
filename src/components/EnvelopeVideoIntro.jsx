@@ -41,6 +41,7 @@ export default function VideoIntro({ onComplete }) {
         src={cardVideo}
         onEnded={finish}
         playsInline
+        muted
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
       />
     </motion.div>
