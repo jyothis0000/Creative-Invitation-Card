@@ -1,8 +1,13 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import cardVideo from '../assets/envlope.mp4';
+import bgmSrc from '../assets/bgm.mp3';
 
 const isDesktop = () => window.innerWidth >= 768;
+
+const bgm = new Audio(bgmSrc);
+bgm.loop = true;
+bgm.volume = 0.4;
 
 export default function VideoIntro({ onComplete }) {
   const videoRef = useRef(null);
@@ -10,11 +15,24 @@ export default function VideoIntro({ onComplete }) {
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
-    if (isDesktop()) onComplete();
+    if (isDesktop()) {
+      // Try immediate autoplay; if blocked, start on first interaction
+      bgm.play().catch(() => {
+        const unlock = () => {
+          bgm.play().catch(() => {});
+          document.removeEventListener('click', unlock);
+          document.removeEventListener('keydown', unlock);
+        };
+        document.addEventListener('click', unlock);
+        document.addEventListener('keydown', unlock);
+      });
+      onComplete();
+    }
   }, []);
 
   function finish() {
     if (fading) return;
+    bgm.play().catch(() => {});
     setFading(true);
     setTimeout(onComplete, 300);
   }
