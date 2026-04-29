@@ -194,7 +194,7 @@ function FallingElement({ style }) {
         left: style.left,
         top: '-40px',
         opacity: 0.7,
-        animation: `ar-petal-spin ${style.dur}s linear ${style.delay}s infinite`,
+        animation: `aa-petal-spin ${style.dur}s linear ${style.delay}s infinite`,
         '--drift': style.drift,
         pointerEvents: 'none',
       }}
@@ -225,8 +225,8 @@ const Portrait = forwardRef(function Portrait({ src, name, side, zIndex = 3 }, r
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: side === 'right' ? 1.2 : 0 }}
         style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
-        <img src={src} alt={name} className="ar-portrait-img" />
-        <span className="ar-portrait-label">{name}</span>
+        <img src={src} alt={name} className="aa-portrait-img" />
+        <span className="aa-portrait-label">{name}</span>
       </motion.div>
     </div>
   );
@@ -276,7 +276,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      id="ar-hero"
+      id="aa-hero"
       style={{
         minHeight: '100vh',
         background: 'linear-gradient(160deg, #111A15 0%, #1B3A2D 45%, #2D5740 100%)',
@@ -307,9 +307,9 @@ export default function HeroSection() {
       <Portrait ref={brideRef} src={brideImg} name="Athira" side="right" zIndex={4} />
 
       {/* Main content */}
-      <div className="ar-hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center', width: '100%' }}>
+      <div className="aa-hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center', width: '100%' }}>
         <motion.span
-          className="ar-eyebrow"
+          className="aa-eyebrow"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.7 }}
@@ -331,7 +331,7 @@ export default function HeroSection() {
             marginBottom: '0.2em',
           }}
         >
-          Alexa
+          Abhishek
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -350,7 +350,7 @@ export default function HeroSection() {
           >
             &amp;
           </motion.span>
-          Richard
+          Athira
         </motion.h1>
 
         <motion.div
@@ -358,7 +358,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 0.8, delay: 1.55 }}
         >
-          <FloralDivider color="#C9A84C" className="ar-hero-divider flex justify-center" />
+          <FloralDivider color="#C9A84C" className="aa-hero-divider flex justify-center" />
         </motion.div>
 
         <motion.p
@@ -376,7 +376,7 @@ export default function HeroSection() {
             letterSpacing: '0.04em',
           }}
         >
-          are inviting you to their wedding!
+          with great joy, we invite you to celebrate our wedding
         </motion.p>
 
         <motion.div

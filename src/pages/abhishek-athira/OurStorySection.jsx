@@ -9,15 +9,15 @@ const fadeUp = {
 
 export default function OurStorySection() {
   return (
-    <section id="ar-story" className="ar-section" style={{ background: 'var(--ar-cream)' }}>
-      <div className="ar-container">
+    <section id="aa-story" className="aa-section" style={{ background: 'var(--aa-cream)' }}>
+      <div className="aa-container">
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <motion.span className="ar-eyebrow" {...fadeUp} transition={{ duration: 0.7 }}>
+          <motion.span className="aa-eyebrow" {...fadeUp} transition={{ duration: 0.7 }}>
             How It All Began
           </motion.span>
           <motion.h2
-            className="ar-heading"
+            className="aa-heading"
             {...fadeUp} transition={{ duration: 0.8, delay: 0.1 }}
             style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}
           >
@@ -32,23 +32,23 @@ export default function OurStorySection() {
           <motion.div {...fadeUp} transition={{ duration: 0.8, delay: 0.2 }}>
             <div style={{
               width: 44, height: 44, borderRadius: '50%',
-              background: 'var(--ar-green)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: 'var(--aa-green)', display: 'flex', alignItems: 'center', justifyContent: 'center',
               marginBottom: '1.25rem',
             }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
             </div>
-            <span className="ar-eyebrow" style={{ textAlign: 'left' }}>2019 — First Meeting</span>
+            <span className="aa-eyebrow" style={{ textAlign: 'left' }}>2019 — First Meeting</span>
             <h3 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: '1.4rem', fontWeight: 500,
-              color: 'var(--ar-green)', marginBottom: '1rem',
+              color: 'var(--aa-green)', marginBottom: '1rem',
             }}>
               A Chance Encounter
             </h3>
-            <p style={{ lineHeight: 1.9, color: 'var(--ar-text-muted)', fontSize: '0.95rem' }}>
-              It was a rainy Tuesday afternoon at a small bookshop in Vienna's first district. Alexa reached for a worn copy of Pablo Neruda's poetry — and so did Richard. Their fingers touched, their eyes met, and neither could look away. With a laugh and an apology, they agreed to share the book over coffee that never ended.
+            <p style={{ lineHeight: 1.9, color: 'var(--aa-text-muted)', fontSize: '0.95rem' }}>
+              It was a rainy Tuesday afternoon at a small bookshop in Vienna's first district. Athira reached for a worn copy of Pablo Neruda's poetry — and so did Abhishek. Their fingers touched, their eyes met, and neither could look away. With a laugh and an apology, they agreed to share the book over coffee that never ended.
             </p>
           </motion.div>
 
@@ -56,7 +56,7 @@ export default function OurStorySection() {
           <motion.div {...fadeUp} transition={{ duration: 0.8, delay: 0.35 }}>
             <div style={{
               width: 44, height: 44, borderRadius: '50%',
-              background: 'var(--ar-green)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: 'var(--aa-green)', display: 'flex', alignItems: 'center', justifyContent: 'center',
               marginBottom: '1.25rem',
             }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5">
@@ -64,15 +64,15 @@ export default function OurStorySection() {
                 <polyline points="12 6 12 12 16 14" />
               </svg>
             </div>
-            <span className="ar-eyebrow" style={{ textAlign: 'left' }}>2021 — Growing Deeper</span>
+            <span className="aa-eyebrow" style={{ textAlign: 'left' }}>2021 — Growing Deeper</span>
             <h3 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: '1.4rem', fontWeight: 500,
-              color: 'var(--ar-green)', marginBottom: '1rem',
+              color: 'var(--aa-green)', marginBottom: '1rem',
             }}>
               Two Years of Adventure
             </h3>
-            <p style={{ lineHeight: 1.9, color: 'var(--ar-text-muted)', fontSize: '0.95rem' }}>
+            <p style={{ lineHeight: 1.9, color: 'var(--aa-text-muted)', fontSize: '0.95rem' }}>
               From weekend escapes to ancient monasteries in the Austrian Alps, to midnight drives along the Danube, their love grew quietly and fiercely. Through every climb and quiet evening, they discovered a shared language — one of laughter, curiosity, and a deep, unspoken knowing.
             </p>
           </motion.div>
@@ -81,23 +81,23 @@ export default function OurStorySection() {
           <motion.div {...fadeUp} transition={{ duration: 0.8, delay: 0.5 }}>
             <div style={{
               width: 44, height: 44, borderRadius: '50%',
-              background: 'var(--ar-green)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: 'var(--aa-green)', display: 'flex', alignItems: 'center', justifyContent: 'center',
               marginBottom: '1.25rem',
             }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="1.5">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
             </div>
-            <span className="ar-eyebrow" style={{ textAlign: 'left' }}>2024 — The Proposal</span>
+            <span className="aa-eyebrow" style={{ textAlign: 'left' }}>2024 — The Proposal</span>
             <h3 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: '1.4rem', fontWeight: 500,
-              color: 'var(--ar-green)', marginBottom: '1rem',
+              color: 'var(--aa-green)', marginBottom: '1rem',
             }}>
               Yes, Forever
             </h3>
-            <p style={{ lineHeight: 1.9, color: 'var(--ar-text-muted)', fontSize: '0.95rem' }}>
-              On a golden September evening beneath a canopy of roses in Schönbrunn Palace Gardens, Richard dropped to one knee with trembling hands and a ring that had belonged to his grandmother. Alexa said yes before he finished the question — and the world stood still for a perfect, shining moment.
+            <p style={{ lineHeight: 1.9, color: 'var(--aa-text-muted)', fontSize: '0.95rem' }}>
+              On a golden September evening beneath a canopy of roses in Schönbrunn Palace Gardens, Abhishek dropped to one knee with trembling hands and a ring that had belonged to his grandmother. Athira said yes before he finished the question — and the world stood still for a perfect, shining moment.
             </p>
           </motion.div>
         </div>
@@ -116,7 +116,7 @@ export default function OurStorySection() {
             fontFamily: "'Cormorant Garamond', serif",
             fontStyle: 'italic',
             fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
-            color: 'var(--ar-green)',
+            color: 'var(--aa-green)',
             lineHeight: 1.6,
             fontWeight: 300,
           }}>
@@ -128,9 +128,9 @@ export default function OurStorySection() {
             fontSize: '0.7rem',
             letterSpacing: '0.25em',
             textTransform: 'uppercase',
-            color: 'var(--ar-gold)',
+            color: 'var(--aa-gold)',
           }}>
-            — Alexa
+            — Athira
           </footer>
         </motion.blockquote>
       </div>

@@ -25,7 +25,7 @@ const events = [
     time: '2:00 PM',
     name: 'Wedding Ceremony',
     location: "St. Augustine's Church, Vienna",
-    desc: 'An intimate ceremony where Alexa and Richard exchange their vows and rings.',
+    desc: 'An intimate ceremony where Athira and Abhishek exchange their vows and rings.',
   },
   {
     icon: (
@@ -70,17 +70,17 @@ const events = [
 export default function EventsSection() {
   return (
     <section
-      id="ar-events"
-      className="ar-section"
+      id="aa-events"
+      className="aa-section"
       style={{
-        background: 'linear-gradient(180deg, var(--ar-ivory) 0%, var(--ar-cream) 100%)',
+        background: 'linear-gradient(180deg, var(--aa-ivory) 0%, var(--aa-cream) 100%)',
       }}
     >
-      <div className="ar-container">
+      <div className="aa-container">
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <motion.span
-            className="ar-eyebrow"
+            className="aa-eyebrow"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -89,7 +89,7 @@ export default function EventsSection() {
             May 24, 2026
           </motion.span>
           <motion.h2
-            className="ar-heading"
+            className="aa-heading"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -106,65 +106,72 @@ export default function EventsSection() {
           {events.map((ev, i) => (
             <motion.div
               key={ev.name}
-              className="ar-event-card"
+              className="aa-event-card"
               initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: i * 0.1 }}
-              style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '1.5rem', alignItems: 'start' }}
             >
-              {/* Time column */}
-              <div style={{ minWidth: 90, textAlign: 'right', paddingTop: '0.2rem' }}>
-                <span style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: '1.05rem',
-                  fontWeight: 500,
-                  color: 'var(--ar-green)',
-                }}>
-                  {ev.time}
-                </span>
-              </div>
-
-              {/* Content */}
-              <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
-                {/* Icon circle */}
-                <div style={{
-                  width: 44, height: 44, borderRadius: '50%',
-                  background: 'var(--ar-ivory)',
-                  border: '1px solid rgba(201,168,76,0.4)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0,
-                  color: 'var(--ar-green)',
-                }}>
-                  {ev.icon}
+              <div className="aa-event-row" style={{
+                display: 'grid',
+                gridTemplateColumns: 'auto 1fr',
+                gap: '1.5rem',
+                alignItems: 'start',
+              }}>
+                {/* Time column */}
+                <div className="aa-event-time" style={{ minWidth: 80, textAlign: 'right', paddingTop: '0.2rem' }}>
+                  <span style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: '1rem',
+                    fontWeight: 500,
+                    color: 'var(--aa-gold)',
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {ev.time}
+                  </span>
                 </div>
 
-                <div>
-                  <h3 style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: '1.2rem', fontWeight: 500,
-                    color: 'var(--ar-green)',
-                    marginBottom: '0.2rem',
+                {/* Content */}
+                <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                  {/* Icon circle */}
+                  <div style={{
+                    width: 40, height: 40, borderRadius: '50%',
+                    background: 'var(--aa-ivory)',
+                    border: '1px solid rgba(201,168,76,0.4)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    flexShrink: 0,
+                    color: 'var(--aa-green)',
                   }}>
-                    {ev.name}
-                  </h3>
-                  <p style={{
-                    fontFamily: "'Lato', sans-serif",
-                    fontSize: '0.75rem',
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
-                    color: 'var(--ar-gold)',
-                    marginBottom: '0.5rem',
-                  }}>
-                    {ev.location}
-                  </p>
-                  <p style={{
-                    fontSize: '0.9rem',
-                    lineHeight: 1.7,
-                    color: 'var(--ar-text-muted)',
-                  }}>
-                    {ev.desc}
-                  </p>
+                    {ev.icon}
+                  </div>
+
+                  <div style={{ minWidth: 0 }}>
+                    <h3 style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: '1.1rem', fontWeight: 500,
+                      color: 'var(--aa-green)',
+                      marginBottom: '0.2rem',
+                    }}>
+                      {ev.name}
+                    </h3>
+                    <p style={{
+                      fontFamily: "'Lato', sans-serif",
+                      fontSize: '0.7rem',
+                      letterSpacing: '0.12em',
+                      textTransform: 'uppercase',
+                      color: 'var(--aa-gold)',
+                      marginBottom: '0.45rem',
+                    }}>
+                      {ev.location}
+                    </p>
+                    <p style={{
+                      fontSize: '0.88rem',
+                      lineHeight: 1.7,
+                      color: 'var(--aa-text-muted)',
+                    }}>
+                      {ev.desc}
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>

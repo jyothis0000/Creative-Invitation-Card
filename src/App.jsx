@@ -2,7 +2,7 @@ import { useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EnvelopeVideoIntro from './components/EnvelopeVideoIntro';
 
-const AlexaRichardCard = lazy(() => import('./pages/AlexaRichardCard'));
+const AbhishekAthiraCard = lazy(() => import('./pages/AbhishekAthiraCard'));
 
 function Loader() {
   return (
@@ -42,7 +42,7 @@ export default function App() {
               transition={{ duration: 0.4, ease: 'easeIn' }}
             >
               <Suspense fallback={<Loader />}>
-                <AlexaRichardCard />
+                <AbhishekAthiraCard />
               </Suspense>
             </motion.div>
           )}

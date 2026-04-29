@@ -4,12 +4,72 @@ import FloralDivider from './FloralDivider';
 
 const WEDDING_DATE = new Date('2026-05-24T14:00:00');
 
+function AddToCalendarButton() {
+  const [hovered, setHovered] = useState(false);
+
+  function openCalendar() {
+    const text     = encodeURIComponent("Athira & Abhishek's Wedding");
+    const details  = encodeURIComponent("You're invited to celebrate the wedding of Athira & Abhishek. Join us for a joyous celebration!");
+    const location = encodeURIComponent('Vienna, Austria');
+    const dates    = '20260524T140000/20260524T180000';
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}&location=${location}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  return (
+    <motion.button
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      onClick={openCalendar}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '0.6rem',
+        padding: '0.7rem 1.8rem',
+        background: hovered ? '#C9A84C' : 'transparent',
+        border: '1px solid #C9A84C',
+        borderRadius: 3,
+        cursor: 'pointer',
+        transition: 'background 0.2s ease, color 0.2s ease',
+        marginBottom: '2.2rem',
+      }}
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+        <rect x="3" y="4" width="18" height="17" rx="2"
+          stroke={hovered ? '#1B3A2D' : '#C9A84C'} strokeWidth="1.8" fill="none"/>
+        <path d="M3 9h18"
+          stroke={hovered ? '#1B3A2D' : '#C9A84C'} strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M8 2v4M16 2v4"
+          stroke={hovered ? '#1B3A2D' : '#C9A84C'} strokeWidth="1.8" strokeLinecap="round"/>
+        <rect x="7.5" y="13" width="2.5" height="2.5" rx="0.4"
+          fill={hovered ? '#1B3A2D' : '#C9A84C'}/>
+      </svg>
+      <span style={{
+        fontFamily: "'Lato', sans-serif",
+        fontSize: '0.6rem',
+        letterSpacing: '0.25em',
+        textTransform: 'uppercase',
+        fontWeight: 700,
+        color: hovered ? '#1B3A2D' : '#C9A84C',
+        transition: 'color 0.2s ease',
+        whiteSpace: 'nowrap',
+      }}>
+        Add to Google Calendar
+      </span>
+    </motion.button>
+  );
+}
+
 function getTimeLeft() {
   const diff = WEDDING_DATE - new Date();
   if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
   return {
-    days:    Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours:   Math.floor((diff / (1000 * 60 * 60)) % 24),
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
     minutes: Math.floor((diff / (1000 * 60)) % 60),
     seconds: Math.floor((diff / 1000) % 60),
   };
@@ -25,9 +85,9 @@ function CelebrationBurst() {
     }}>
       {Array.from({ length: 24 }).map((_, i) => {
         const angle = (i / 24) * 360;
-        const dist  = 45 + (i % 3) * 18;
+        const dist = 45 + (i % 3) * 18;
         const color = colors[i % colors.length];
-        const size  = 5 + (i % 4);
+        const size = 5 + (i % 4);
         return (
           <motion.div
             key={i}
@@ -67,13 +127,13 @@ function CelebrationBurst() {
 
 /* ─── Individual scratch tile ───────────────────────────────── */
 function ScratchTile({ value, label, delay }) {
-  const canvasRef  = useRef(null);
-  const drawing    = useRef(false);
-  const revealed   = useRef(false);
-  const [done, setDone]           = useState(false);
-  const [burst, setBurst]         = useState(false);
-  const [glowing, setGlowing]     = useState(false);
-  const [flipNum, setFlipNum]     = useState(false);
+  const canvasRef = useRef(null);
+  const drawing = useRef(false);
+  const revealed = useRef(false);
+  const [done, setDone] = useState(false);
+  const [burst, setBurst] = useState(false);
+  const [glowing, setGlowing] = useState(false);
+  const [flipNum, setFlipNum] = useState(false);
   const prevVal = useRef(value);
 
   /* Flash the number when it changes (after reveal) */
@@ -86,60 +146,89 @@ function ScratchTile({ value, label, delay }) {
     }
   }, [value, done]);
 
-  /* Draw the scratch overlay once on mount */
+  /* Draw gold glowing scratch overlay once on mount */
   useEffect(() => {
     if (done) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const w = canvas.width, h = canvas.height;
-
-    // Gradient base
     ctx.globalCompositeOperation = 'source-over';
-    const grad = ctx.createLinearGradient(0, 0, w, h);
-    grad.addColorStop(0, '#111A15');
-    grad.addColorStop(1, '#1B3A2D');
-    ctx.fillStyle = grad;
+
+    // 1. Metallic gold diagonal gradient
+    const gold = ctx.createLinearGradient(0, 0, w, h);
+    gold.addColorStop(0,    '#6B4C0F');
+    gold.addColorStop(0.22, '#B8871E');
+    gold.addColorStop(0.44, '#E8C84A');
+    gold.addColorStop(0.5,  '#FFF5A8');
+    gold.addColorStop(0.56, '#E8C84A');
+    gold.addColorStop(0.78, '#B8871E');
+    gold.addColorStop(1,    '#6B4C0F');
+    ctx.fillStyle = gold;
     ctx.fillRect(0, 0, w, h);
 
-    // Subtle gold texture dots
-    for (let i = 0; i < 80; i++) {
-      ctx.fillStyle = `rgba(201,168,76,${0.05 + Math.random() * 0.12})`;
+    // 2. Diagonal scratch-line texture
+    for (let i = -h; i < w + h; i += 5) {
       ctx.beginPath();
-      ctx.arc(Math.random() * w, Math.random() * h, Math.random() * 2.5, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.moveTo(i, 0);
+      ctx.lineTo(i + h, h);
+      ctx.strokeStyle = 'rgba(0,0,0,0.045)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
     }
 
-    // Thin gold border inner glow
-    ctx.strokeStyle = 'rgba(201,168,76,0.4)';
-    ctx.lineWidth = 1.5;
-    ctx.strokeRect(3, 3, w - 6, h - 6);
+    // 3. Top gloss highlight
+    const gloss = ctx.createLinearGradient(0, 0, 0, h * 0.52);
+    gloss.addColorStop(0, 'rgba(255,255,255,0.48)');
+    gloss.addColorStop(1, 'transparent');
+    ctx.fillStyle = gloss;
+    ctx.fillRect(0, 0, w, h * 0.52);
 
-    // "SCRATCH" text
-    ctx.fillStyle = 'rgba(201,168,76,0.75)';
-    ctx.font = '700 10px Lato, sans-serif';
-    ctx.textAlign = 'center';
+    // 4. Diagonal shimmer streak
+    const streak = ctx.createLinearGradient(w * 0.15, 0, w * 0.65, h);
+    streak.addColorStop(0,    'transparent');
+    streak.addColorStop(0.42, 'transparent');
+    streak.addColorStop(0.5,  'rgba(255,255,255,0.28)');
+    streak.addColorStop(0.58, 'transparent');
+    streak.addColorStop(1,    'transparent');
+    ctx.fillStyle = streak;
+    ctx.fillRect(0, 0, w, h);
+
+    // 5. Bottom depth shadow
+    const depth = ctx.createLinearGradient(0, h * 0.5, 0, h);
+    depth.addColorStop(0, 'transparent');
+    depth.addColorStop(1, 'rgba(0,0,0,0.18)');
+    ctx.fillStyle = depth;
+    ctx.fillRect(0, h * 0.5, w, h * 0.5);
+
+    // 6. Double inner border (white + dark)
+    ctx.strokeStyle = 'rgba(255,255,255,0.55)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(4, 4, w - 8, h - 8);
+    ctx.strokeStyle = 'rgba(80,45,0,0.25)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(6, 6, w - 12, h - 12);
+
+    // 7. "SCRATCH" label
+    ctx.shadowColor = 'rgba(255,200,60,0.6)';
+    ctx.shadowBlur  = 6;
+    ctx.fillStyle   = 'rgba(45,25,0,0.82)';
+    ctx.font        = 'bold 9px Lato, sans-serif';
+    ctx.textAlign   = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('SCRATCH', w / 2, h / 2 - 12);
-
-    // Fingernail/coin icon
-    ctx.strokeStyle = 'rgba(201,168,76,0.6)';
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    ctx.arc(w / 2, h / 2 + 6, 9, 0, Math.PI);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(w / 2 - 9, h / 2 + 6);
-    ctx.lineTo(w / 2 + 9, h / 2 + 6);
-    ctx.stroke();
+    ctx.fillText('✶ SCRATCH ✶', w / 2, h / 2 - 9);
+    ctx.shadowBlur  = 0;
+    ctx.font        = '7.5px Lato, sans-serif';
+    ctx.fillStyle   = 'rgba(45,25,0,0.6)';
+    ctx.fillText('TO REVEAL', w / 2, h / 2 + 9);
   }, [done]);
 
   const getXY = (e, canvas) => {
     const r = canvas.getBoundingClientRect();
     const src = e.touches?.[0] ?? e;
     return {
-      x: (src.clientX - r.left) * (canvas.width  / r.width),
-      y: (src.clientY - r.top)  * (canvas.height / r.height),
+      x: (src.clientX - r.left) * (canvas.width / r.width),
+      y: (src.clientY - r.top) * (canvas.height / r.height),
     };
   };
 
@@ -170,15 +259,15 @@ function ScratchTile({ value, label, delay }) {
     }
   }, []);
 
-  const onDown  = (e) => { drawing.current = true; const p = getXY(e, canvasRef.current); scratch(p.x, p.y); };
-  const onMove  = (e) => { if (!drawing.current) return; const p = getXY(e, canvasRef.current); scratch(p.x, p.y); };
-  const onUp    = () => { drawing.current = false; };
+  const onDown = (e) => { drawing.current = true; const p = getXY(e, canvasRef.current); scratch(p.x, p.y); };
+  const onMove = (e) => { if (!drawing.current) return; const p = getXY(e, canvasRef.current); scratch(p.x, p.y); };
+  const onUp = () => { drawing.current = false; };
   const onTStart = (e) => { e.preventDefault(); onDown(e); };
-  const onTMove  = (e) => { e.preventDefault(); onMove(e); };
+  const onTMove = (e) => { e.preventDefault(); onMove(e); };
 
   return (
     <motion.div
-      className="ar-scratch-tile"
+      className="aa-scratch-tile"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -186,15 +275,17 @@ function ScratchTile({ value, label, delay }) {
       style={{
         position: 'relative',
         boxShadow: glowing
-          ? '0 0 0 2px #C9A84C, 0 0 20px rgba(201,168,76,0.5)'
+          ? '0 0 0 2px #C9A84C, 0 0 28px rgba(201,168,76,0.65), 0 0 60px rgba(201,168,76,0.3)'
+          : !done
+          ? '0 0 0 1px rgba(201,168,76,0.5), 0 4px 18px rgba(201,168,76,0.3), 0 0 40px rgba(201,168,76,0.15)'
           : undefined,
         transition: 'box-shadow 0.4s ease',
       }}
     >
       {/* Revealed value (always rendered behind) */}
-      <div className="ar-scratch-back">
+      <div className="aa-scratch-back">
         <motion.span
-          className="ar-countdown-num"
+          className="aa-countdown-num"
           style={{
             transform: flipNum ? 'translateY(-6px)' : 'translateY(0)',
             opacity: flipNum ? 0.4 : 1,
@@ -203,7 +294,7 @@ function ScratchTile({ value, label, delay }) {
         >
           {String(value).padStart(2, '0')}
         </motion.span>
-        <span className="ar-countdown-label">{label}</span>
+        <span className="aa-countdown-label">{label}</span>
       </div>
 
       {/* Canvas scratch layer */}
@@ -246,21 +337,21 @@ export default function CountdownSection() {
   }, []);
 
   const tiles = [
-    { key: 'days',    value: time.days,    label: 'Days',    delay: 0.3 },
-    { key: 'hours',   value: time.hours,   label: 'Hours',   delay: 0.4 },
+    { key: 'days', value: time.days, label: 'Days', delay: 0.3 },
+    { key: 'hours', value: time.hours, label: 'Hours', delay: 0.4 },
     { key: 'minutes', value: time.minutes, label: 'Minutes', delay: 0.5 },
     { key: 'seconds', value: time.seconds, label: 'Seconds', delay: 0.6 },
   ];
 
   return (
     <section
-      id="ar-countdown"
-      className="ar-section"
-      style={{ background: 'var(--ar-ivory)', textAlign: 'center' }}
+      id="aa-countdown"
+      className="aa-section"
+      style={{ background: 'var(--aa-ivory)', textAlign: 'center' }}
     >
-      <div className="ar-container--narrow">
+      <div className="aa-container--narrow">
         <motion.span
-          className="ar-eyebrow"
+          className="aa-eyebrow"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -270,7 +361,7 @@ export default function CountdownSection() {
         </motion.span>
 
         <motion.h2
-          className="ar-heading"
+          className="aa-heading"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -281,7 +372,7 @@ export default function CountdownSection() {
         </motion.h2>
 
         <motion.p
-          className="ar-subheading"
+          className="aa-subheading"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -303,30 +394,35 @@ export default function CountdownSection() {
             display: 'inline-flex', alignItems: 'center', gap: '0.8rem',
             fontFamily: "'Playfair Display', serif",
             fontSize: 'clamp(0.95rem, 2vw, 1.2rem)',
-            color: 'var(--ar-green)', marginBottom: '2.5rem',
+            color: 'var(--aa-green)', marginBottom: '2.5rem',
             flexWrap: 'wrap', justifyContent: 'center',
           }}
         >
           <span>May</span>
-          <span style={{ color: 'var(--ar-gold)', fontWeight: 600, fontSize: '1.6em' }}>24</span>
+          <span style={{ color: 'var(--aa-gold)', fontWeight: 600, fontSize: '1.6em' }}>24</span>
           <span>2026</span>
           <span style={{ color: 'rgba(201,168,76,0.4)' }}>◆</span>
-          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', color: 'var(--ar-text-muted)' }}>
+          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', color: 'var(--aa-text-muted)' }}>
             Vienna, Austria
           </span>
         </motion.div>
 
+        {/* Add to Calendar */}
+        <div style={{ textAlign: 'center' }}>
+          <AddToCalendarButton />
+        </div>
+
         {/* Scratch row */}
-        <div className="ar-scratch-row">
+        <div className="aa-scratch-row">
           {tiles.map((t, i) => (
-            <div key={t.key} className="ar-scratch-group">
+            <div key={t.key} className="aa-scratch-group">
               <ScratchTile
                 value={t.value}
                 label={t.label}
                 delay={t.delay}
               />
               {i < tiles.length - 1 && (
-                <span className="ar-scratch-sep">:</span>
+                <span className="aa-scratch-sep">:</span>
               )}
             </div>
           ))}
@@ -341,7 +437,7 @@ export default function CountdownSection() {
             fontFamily: "'Cormorant Garamond', serif",
             fontStyle: 'italic',
             fontSize: '1.05rem',
-            color: 'var(--ar-text-muted)',
+            color: 'var(--aa-text-muted)',
             marginTop: '2.5rem',
           }}
         >

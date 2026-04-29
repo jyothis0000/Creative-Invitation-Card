@@ -19,7 +19,7 @@ export default function FooterSection() {
       {/* Top wave */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, lineHeight: 0 }}>
         <svg viewBox="0 0 1440 50" preserveAspectRatio="none" style={{ display: 'block', width: '100%' }}>
-          <path d="M0,0 Q720,50 1440,0 L1440,0 L0,0 Z" fill="var(--ar-cream)" />
+          <path d="M0,0 Q720,50 1440,0 L1440,0 L0,0 Z" fill="var(--aa-cream)" />
         </svg>
       </div>
 
@@ -44,7 +44,7 @@ export default function FooterSection() {
               color: '#C9A84C',
               fontStyle: 'italic',
             }}>
-              A&R
+              A&A
             </span>
           </div>
 
@@ -55,7 +55,7 @@ export default function FooterSection() {
             color: '#FAF7F2',
             lineHeight: 1.1,
           }}>
-            Alexa &amp; Richard
+            Abhishek &amp; Athira
           </h2>
         </motion.div>
 
@@ -111,7 +111,7 @@ export default function FooterSection() {
             fontSize: '1.1rem',
             color: 'rgba(201,168,76,0.7)',
           }}>
-            #AlexaAndRichard
+            #AbhishekAndAthira
           </p>
         </motion.div>
 
@@ -136,8 +136,8 @@ export default function FooterSection() {
       >
         <img
           src={caricature}
-          alt="Alexa and Richard caricature"
-          className="ar-footer-caricature"
+          alt="Athira and Abhishek caricature"
+          className="aa-footer-caricature"
           style={{ display: 'block', width: 'auto', objectFit: 'contain' }}
         />
       </motion.div>

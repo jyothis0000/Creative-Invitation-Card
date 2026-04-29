@@ -24,7 +24,7 @@ function Confetti() {
       {pieces.map((p, i) => (
         <div
           key={i}
-          className="ar-confetti-piece"
+          className="aa-confetti-piece"
           style={{
             left: p.left,
             width: p.size, height: p.size,
@@ -43,7 +43,6 @@ function Confetti() {
 export default function RSVPSection() {
   const [selected, setSelected] = useState(null);
   const [popupOpen, setPopupOpen] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', guests: 1 });
   const [flying, setFlying] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -65,7 +64,7 @@ export default function RSVPSection() {
   }
 
   return (
-    <section id="ar-rsvp" className="ar-section" style={{ background: 'var(--ar-ivory)' }}>
+    <section id="aa-rsvp" className="aa-section" style={{ background: 'var(--aa-ivory)' }}>
       {submitted && <Confetti />}
 
       {/* Flying envelope animation */}
@@ -75,18 +74,18 @@ export default function RSVPSection() {
           style={{
             position: 'fixed', bottom: '45%', left: '45%',
             fontSize: '2.5rem', zIndex: 9998, pointerEvents: 'none',
-            animation: 'ar-plane-fly 1.1s ease-in-out forwards',
+            animation: 'aa-plane-fly 1.1s ease-in-out forwards',
           }}
         >
           💌
         </div>
       )}
 
-      <div className="ar-container--narrow">
+      <div className="aa-container--narrow">
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
           <motion.span
-            className="ar-eyebrow"
+            className="aa-eyebrow"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -95,7 +94,7 @@ export default function RSVPSection() {
             Kindly Reply By April 1, 2026
           </motion.span>
           <motion.h2
-            className="ar-heading"
+            className="aa-heading"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -115,7 +114,7 @@ export default function RSVPSection() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
             >
-              <p className="ar-label" style={{ textAlign: 'center', marginBottom: '1rem' }}>
+              <p className="aa-label" style={{ textAlign: 'center', marginBottom: '1rem' }}>
                 Your Response
               </p>
               <motion.div
@@ -129,7 +128,7 @@ export default function RSVPSection() {
                   <motion.button
                     key={opt.value}
                     type="button"
-                    className={`ar-rsvp-option${selected === opt.value ? ' selected' : ''}`}
+                    className={`aa-rsvp-option${selected === opt.value ? ' selected' : ''}`}
                     onClick={() => openPopup(opt.value)}
                     initial={{ opacity: 0, x: -24 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -138,7 +137,7 @@ export default function RSVPSection() {
                     whileHover={{ scale: 1.02, x: 4 }}
                     whileTap={{ scale: 0.97 }}
                   >
-                    <div className="ar-rsvp-dot" />
+                    <div className="aa-rsvp-dot" />
                     <span style={{ fontSize: '1.2rem' }}>{opt.emoji}</span>
                     <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem' }}>
                       {opt.label}
@@ -164,7 +163,7 @@ export default function RSVPSection() {
               <h3 style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: '2rem', fontWeight: 500,
-                color: 'var(--ar-green)', marginBottom: '0.75rem',
+                color: 'var(--aa-green)', marginBottom: '0.75rem',
               }}>
                 Thank You!
               </h3>
@@ -173,7 +172,7 @@ export default function RSVPSection() {
                 fontFamily: "'Cormorant Garamond', serif",
                 fontStyle: 'italic',
                 fontSize: '1.2rem',
-                color: 'var(--ar-text-muted)',
+                color: 'var(--aa-text-muted)',
                 marginBottom: '0.5rem',
               }}>
                 {selected === 'yes'
@@ -182,8 +181,8 @@ export default function RSVPSection() {
                     ? "We'll miss you dearly — we'll think of you on the day."
                     : "Take your time — we'll be here whenever you're ready."}
               </p>
-              <p style={{ fontSize: '0.85rem', color: 'var(--ar-text-muted)' }}>
-                — Alexa & Richard
+              <p style={{ fontSize: '0.85rem', color: 'var(--aa-text-muted)' }}>
+                — Abhishek & Athira
               </p>
             </motion.div>
           )}
@@ -194,7 +193,7 @@ export default function RSVPSection() {
       <AnimatePresence>
         {popupOpen && (
           <motion.div
-            className="ar-popup-backdrop"
+            className="aa-popup-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -203,7 +202,7 @@ export default function RSVPSection() {
           >
             {/* Panel — child of backdrop so flex centering works */}
             <motion.div
-              className="ar-popup"
+              className="aa-popup"
               initial={{ opacity: 0, scale: 0.88, y: 40 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.88, y: 40 }}
@@ -215,7 +214,7 @@ export default function RSVPSection() {
               {/* Close */}
               <button
                 type="button"
-                className="ar-popup-close"
+                className="aa-popup-close"
                 onClick={closePopup}
                 aria-label="Close"
               >
@@ -223,94 +222,39 @@ export default function RSVPSection() {
               </button>
 
               {/* Selected option badge */}
-              {/* <div className="ar-popup-badge">
-                <span style={{ fontSize: '1.6rem' }}>
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: '0.75rem',
+                padding: '0.9rem 1.2rem',
+                background: 'var(--aa-ivory)',
+                border: '1px solid rgba(201,168,76,0.3)',
+                borderRadius: 4,
+                marginBottom: '1.5rem',
+              }}>
+                <span style={{ fontSize: '1.5rem', lineHeight: 1 }}>
                   {RSVP_OPTIONS.find(o => o.value === selected)?.emoji}
                 </span>
                 <span style={{
                   fontFamily: "'Cormorant Garamond', serif",
                   fontStyle: 'italic',
                   fontSize: '1.05rem',
-                  color: 'var(--ar-text-muted)',
+                  color: 'var(--aa-text-muted)',
                 }}>
                   {RSVP_OPTIONS.find(o => o.value === selected)?.label}
                 </span>
-              </div> */}
-              <label className="ar-label">Number of Guests</label>
+              </div>
 
-
-              <FloralDivider style={{ margin: '1.25rem 0' }} />
+              <FloralDivider style={{ margin: '0 0 1.5rem' }} />
 
               <form onSubmit={handleSubmit}>
-                <div style={{ display: 'grid', gap: '1.25rem' }}>
-
-
-                  {selected !== 'no' && (
-                    <>
-                      {/* <div>
-                        <label className="ar-label" htmlFor="ar-email">Email Address</label>
-                        <input
-                          id="ar-email" name="email" type="email"
-                          value={form.email} onChange={handleChange}
-                          className="ar-input"
-                          placeholder="your@email.com"
-                        />
-                      </div> */}
-
-                      <div>
-                        <div style={{
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          gap: '1.25rem', marginTop: '0.5rem',
-                        }}>
-                          <motion.button
-                            type="button"
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => setForm(f => ({ ...f, guests: Math.max(1, f.guests - 1) }))}
-                            style={{
-                              width: '2.5rem', height: '2.5rem',
-                              borderRadius: '50%', border: '1.5px solid var(--ar-gold)',
-                              background: 'transparent', color: 'var(--ar-gold)',
-                              fontSize: '1.4rem', lineHeight: 1,
-                              cursor: 'pointer', display: 'flex',
-                              alignItems: 'center', justifyContent: 'center',
-                            }}
-                          >−</motion.button>
-                          <span style={{
-                            fontFamily: 'var(--ar-serif)', fontSize: '1.75rem',
-                            color: 'var(--ar-forest)', minWidth: '2rem', textAlign: 'center',
-                          }}>
-                            {form.guests}
-                          </span>
-                          <motion.button
-                            type="button"
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => setForm(f => ({ ...f, guests: Math.min(10, f.guests + 1) }))}
-                            style={{
-                              width: '2.5rem', height: '2.5rem',
-                              borderRadius: '50%', border: '1.5px solid var(--ar-gold)',
-                              background: 'var(--ar-gold)', color: '#fff',
-                              fontSize: '1.4rem', lineHeight: 1,
-                              cursor: 'pointer', display: 'flex',
-                              alignItems: 'center', justifyContent: 'center',
-                            }}
-                          >+</motion.button>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-
-                <div style={{ marginTop: '1.75rem', textAlign: 'center' }}>
-                  <motion.button
-                    type="submit"
-                    className="ar-btn ar-btn--solid"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.97 }}
-                    style={{ fontSize: '0.75rem', letterSpacing: '0.25em', width: '100%' }}
-                  >
-                    Send My RSVP 💌
-                  </motion.button>
-                </div>
+                <motion.button
+                  type="submit"
+                  className="aa-btn aa-btn--solid"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{ fontSize: '0.75rem', letterSpacing: '0.25em', width: '100%' }}
+                >
+                  Send My RSVP 💌
+                </motion.button>
               </form>
             </motion.div>
           </motion.div>

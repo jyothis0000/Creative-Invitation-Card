@@ -1,21 +1,21 @@
 import { lazy, Suspense, useEffect } from 'react';
-import './alexa-richard/alexa-richard.css';
-import HeroSection from './alexa-richard/HeroSection';
+import './abhishek-athira/abhishek-athira.css';
+import HeroSection from './abhishek-athira/HeroSection';
 
-const CountdownSection = lazy(() => import('./alexa-richard/CountdownSection'));
-const OurStorySection  = lazy(() => import('./alexa-richard/OurStorySection'));
-const EventsSection    = lazy(() => import('./alexa-richard/EventsSection'));
-const PhotoGallery     = lazy(() => import('./alexa-richard/PhotoGallery'));
-const RSVPSection      = lazy(() => import('./alexa-richard/RSVPSection'));
-const VenueSection     = lazy(() => import('./alexa-richard/VenueSection'));
-const FooterSection    = lazy(() => import('./alexa-richard/FooterSection'));
+const CountdownSection = lazy(() => import('./abhishek-athira/CountdownSection'));
+const OurStorySection  = lazy(() => import('./abhishek-athira/OurStorySection'));
+const EventsSection    = lazy(() => import('./abhishek-athira/EventsSection'));
+const PhotoGallery     = lazy(() => import('./abhishek-athira/PhotoGallery'));
+const RSVPSection      = lazy(() => import('./abhishek-athira/RSVPSection'));
+const VenueSection     = lazy(() => import('./abhishek-athira/VenueSection'));
+const FooterSection    = lazy(() => import('./abhishek-athira/FooterSection'));
 
 function SectionFallback() {
   return (
     <div style={{
       minHeight: '40vh',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      background: 'var(--ar-cream)',
+      background: 'var(--aa-cream)',
     }}>
       <svg width="36" height="36" viewBox="0 0 36 36" aria-label="Loading" role="status">
         <circle
@@ -34,15 +34,15 @@ function SectionFallback() {
   );
 }
 
-export default function AlexaRichardCard() {
+export default function AbhishekAthiraCard() {
   useEffect(() => {
     const prev = document.title;
-    document.title = 'Alexa & Richard — Wedding Invitation';
+    document.title = 'Abhishek & Athira — Wedding Invitation';
     return () => { document.title = prev; };
   }, []);
 
   return (
-    <div className="ar-page">
+    <div className="aa-page">
       {/* Hero — eager loaded */}
       <HeroSection />
 

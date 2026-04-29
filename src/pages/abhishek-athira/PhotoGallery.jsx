@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloralDivider from './FloralDivider';
 
-/* Beautiful SVG gradient placeholders — replace src with real photos at /gallery/ar-N.png */
+/* Beautiful SVG gradient placeholders — replace src with real photos at /gallery/aa-N.png */
 function makeSvgPlaceholder(color1, color2, label) {
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'>
     <defs>
@@ -19,12 +19,12 @@ function makeSvgPlaceholder(color1, color2, label) {
 }
 
 const images = [
-  // { src: '/gallery/ar-1.png', fallback: makeSvgPlaceholder('%231B3A2D','%232D5740','Alexa & Richard'), alt: 'Alexa and Richard couple portrait', span: true },
-  { src: '/gallery/ar-2.png', fallback: makeSvgPlaceholder('%232D5740', '%23C9A84C', 'The Venue'), alt: 'Wedding venue chapel' },
-  { src: '/gallery/ar-3.png', fallback: makeSvgPlaceholder('%23E8BAA3', '%23C48D77', 'Reception'), alt: 'Reception table setting' },
-  { src: '/gallery/ar-4.png', fallback: makeSvgPlaceholder('%231B3A2D', '%23E8BAA3', 'Garden'), alt: 'Couple in garden' },
-  { src: '/gallery/ar-5.png', fallback: makeSvgPlaceholder('%23C9A84C', '%23E8C97A', 'The Cake'), alt: 'Wedding cake' },
-  { src: '/gallery/ar-6.png', fallback: makeSvgPlaceholder('%232D5740', '%23C9A84C', 'The Rings'), alt: 'Wedding rings' },
+  // { src: '/gallery/aa-1.png', fallback: makeSvgPlaceholder('%231B3A2D','%232D5740','Abhishek & Athira'), alt: 'Abhishek and Athira couple portrait', span: true },
+  { src: '/gallery/aa-2.png', fallback: makeSvgPlaceholder('%232D5740', '%23C9A84C', 'The Venue'), alt: 'Wedding venue chapel' },
+  { src: '/gallery/aa-3.png', fallback: makeSvgPlaceholder('%23E8BAA3', '%23C48D77', 'Reception'), alt: 'Reception table setting' },
+  { src: '/gallery/aa-4.png', fallback: makeSvgPlaceholder('%231B3A2D', '%23E8BAA3', 'Garden'), alt: 'Couple in garden' },
+  { src: '/gallery/aa-5.png', fallback: makeSvgPlaceholder('%23C9A84C', '%23E8C97A', 'The Cake'), alt: 'Wedding cake' },
+  { src: '/gallery/aa-6.png', fallback: makeSvgPlaceholder('%232D5740', '%23C9A84C', 'The Rings'), alt: 'Wedding rings' },
 ];
 
 function GalleryImage({ src, fallback, alt, style }) {
@@ -45,34 +45,34 @@ export default function PhotoGallery() {
   const [lightbox, setLightbox] = useState(null);
 
   return (
-    <section id="ar-gallery" className="ar-section" style={{ background: 'var(--ar-green)', position: 'relative' }}>
+    <section id="aa-gallery" className="aa-section" style={{ background: 'var(--aa-green)', position: 'relative' }}>
       {/* Decorative top wave */}
       <div style={{ position: 'absolute', top: 0, left: 0, right: 0, lineHeight: 0 }}>
         <svg viewBox="0 0 1440 40" preserveAspectRatio="none" style={{ display: 'block', width: '100%' }}>
-          <path d="M0,0 Q360,40 720,20 Q1080,0 1440,30 L1440,0 Z" fill="var(--ar-cream)" />
+          <path d="M0,0 Q360,40 720,20 Q1080,0 1440,30 L1440,0 Z" fill="var(--aa-cream)" />
         </svg>
       </div>
 
-      <div className="ar-container" style={{ position: 'relative', zIndex: 2, paddingTop: '2rem' }}>
+      <div className="aa-container" style={{ position: 'relative', zIndex: 2, paddingTop: '2rem' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <motion.span
-            className="ar-eyebrow"
+            className="aa-eyebrow"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            style={{ color: 'var(--ar-gold)' }}
+            style={{ color: 'var(--aa-gold)' }}
           >
             Captured Memories
           </motion.span>
           <motion.h2
-            className="ar-heading"
+            className="aa-heading"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: 'var(--ar-cream)' }}
+            style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: 'var(--aa-cream)' }}
           >
             Our Moments
           </motion.h2>
@@ -80,11 +80,11 @@ export default function PhotoGallery() {
         </div>
 
         {/* Gallery grid */}
-        <div className="ar-gallery-flex">
+        <div className="aa-gallery-flex">
           {images.map((img, i) => (
             <motion.div
               key={i}
-              className="ar-gallery-item"
+              className="aa-gallery-item"
               style={{
                 height: img.span ? 420 : 200,
                 gridRow: img.span ? 'span 2' : undefined,
@@ -96,7 +96,7 @@ export default function PhotoGallery() {
               onClick={() => setLightbox(img)}
             >
               <GalleryImage src={img.src} fallback={img.fallback} alt={img.alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }} />
-              <div className="ar-gallery-overlay">
+              <div className="aa-gallery-overlay">
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
                   <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
                   <line x1="11" y1="8" x2="11" y2="14" /><line x1="8" y1="11" x2="14" y2="11" />
@@ -121,7 +121,7 @@ export default function PhotoGallery() {
           }}
         >
           Share your photos with us using{' '}
-          <span style={{ color: 'var(--ar-gold)', fontWeight: 600 }}>#AlexaAndRichard</span>
+          <span style={{ color: 'var(--aa-gold)', fontWeight: 600 }}>#AbhishekAndAthira</span>
         </motion.p>
       </div>
 
@@ -165,7 +165,7 @@ export default function PhotoGallery() {
       {/* Bottom wave */}
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, lineHeight: 0 }}>
         <svg viewBox="0 0 1440 40" preserveAspectRatio="none" style={{ display: 'block', width: '100%' }}>
-          <path d="M0,40 Q360,0 720,20 Q1080,40 1440,10 L1440,40 Z" fill="var(--ar-ivory)" />
+          <path d="M0,40 Q360,0 720,20 Q1080,40 1440,10 L1440,40 Z" fill="var(--aa-ivory)" />
         </svg>
       </div>
     </section>
