@@ -221,8 +221,8 @@ const Portrait = forwardRef(function Portrait({ src, name, side, zIndex = 3 }, r
       }}
     >
       <motion.div
-        animate={{ y: [0, -14, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: side === 'right' ? 0.8 : 0 }}
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: side === 'right' ? 1.2 : 0 }}
         style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
         <img src={src} alt={name} className="ar-portrait-img" />
