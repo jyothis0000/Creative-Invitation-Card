@@ -1,104 +1,40 @@
 import { motion } from 'framer-motion';
 import LotusDivider from './ui/LotusDivider';
+import keralaMapImg from '../assets/kerala_thrissur_map.png';
 
 function KeralaMapSVG() {
   return (
-    <svg
-      viewBox="0 0 400 520"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ width: '100%', maxWidth: 380, height: 'auto', display: 'block', margin: '0 auto' }}
-      aria-label="Simplified Kerala map showing wedding venue location"
-    >
-      {/* Kerala outline — simplified */}
-      <path
-        d="M180,20 Q220,15 240,30 Q280,45 295,80 Q310,120 305,160 Q310,200 300,240 Q295,280 280,320 Q265,360 255,400 Q248,430 240,460 Q230,490 220,510 Q215,518 210,512 Q200,495 195,475 Q185,445 182,415 Q178,385 172,355 Q162,320 158,290 Q148,255 148,220 Q145,185 148,150 Q150,115 155,85 Q163,50 180,20Z"
-        fill="#2D5016"
-        opacity="0.85"
-        stroke="#4a7a22"
-        strokeWidth="2"
+    <div style={{ position: 'relative', width: '100%', maxWidth: 380, margin: '0 auto', overflow: 'hidden', borderRadius: '4px' }}>
+      <img
+        src={keralaMapImg}
+        alt="Artistic map of Kerala"
+        style={{ width: '100%', height: 'auto', display: 'block' }}
       />
-      {/* Western coast highlights */}
-      <path
-        d="M148,220 Q138,240 132,270 Q128,295 135,310 Q140,290 148,255Z"
-        fill="#1a4010"
-        opacity="0.6"
-      />
-      {/* Water bodies — backwaters */}
-      <path
-        d="M200,320 Q210,330 215,350 Q210,370 200,375 Q195,365 200,345Z"
-        fill="#4a90c4"
-        opacity="0.6"
-      />
-      <path
-        d="M215,380 Q225,385 228,400 Q220,408 212,400 Q210,390 215,380Z"
-        fill="#4a90c4"
-        opacity="0.5"
-      />
-      {/* Rivers */}
-      <path
-        d="M180,180 Q192,200 188,220 Q182,238 178,255"
-        fill="none" stroke="#4a90c4" strokeWidth="2" opacity="0.7"
-      />
-      <path
-        d="M230,280 Q222,295 215,310 Q210,325 208,340"
-        fill="none" stroke="#4a90c4" strokeWidth="1.5" opacity="0.6"
-      />
-
-      {/* Cities/markers */}
-      {/* Trivandrum */}
-      <g transform="translate(215, 460)">
-        <circle cx="0" cy="0" r="5" fill="#C8941A" opacity="0.9" />
-        <circle cx="0" cy="0" r="9" fill="none" stroke="#C8941A" strokeWidth="1" opacity="0.5" />
-        <text x="10" y="4" fontFamily="'Lato', sans-serif" fontSize="10" fill="#FAF3E0" opacity="0.9">Trivandrum</text>
-        {/* Airport icon */}
-        <text x="-4" y="-10" fontSize="10" fill="#E8B84B">✈</text>
-      </g>
-
-      {/* Kochi/Ernakulam */}
-      <g transform="translate(165, 290)">
-        <circle cx="0" cy="0" r="5" fill="#C8941A" opacity="0.9" />
-        <circle cx="0" cy="0" r="9" fill="none" stroke="#C8941A" strokeWidth="1" opacity="0.5" />
-        <text x="10" y="4" fontFamily="'Lato', sans-serif" fontSize="10" fill="#FAF3E0" opacity="0.9">Ernakulam</text>
-        {/* Train icon */}
-        <text x="-5" y="-10" fontSize="9" fill="#E8B84B">🚂</text>
-      </g>
-
-      {/* Thrissur — VENUE */}
-      <g transform="translate(175, 230)">
-        {/* Pulsing venue pin */}
-        <circle cx="0" cy="0" r="14" fill="#8B0000" opacity="0.2">
-          <animate attributeName="r" values="10;18;10" dur="2s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.3;0.05;0.3" dur="2s" repeatCount="indefinite" />
-        </circle>
-        <circle cx="0" cy="0" r="8" fill="#8B0000" opacity="0.9" />
-        <circle cx="0" cy="0" r="4" fill="#E8B84B" />
-        {/* Pin tail */}
-        <path d="M0,8 L0,20" stroke="#8B0000" strokeWidth="2" strokeLinecap="round" />
-        <circle cx="0" cy="21" r="2" fill="#8B0000" />
-        <text x="12" y="4" fontFamily="'Cormorant Garamond', serif" fontSize="13" fontWeight="600" fill="#E8B84B">Thrissur ★</text>
-        <text x="12" y="16" fontFamily="'Lato', sans-serif" fontSize="8" fill="#FAF3E0" opacity="0.8">Palace Grounds</text>
-      </g>
-
-      {/* Route lines */}
-      <path
-        d="M215,460 Q200,380 175,230"
-        fill="none" stroke="#C8941A" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.5"
-      />
-      <path
-        d="M165,290 Q168,260 175,230"
-        fill="none" stroke="#C8941A" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.5"
-      />
-
-      {/* Compass rose */}
-      <g transform="translate(340, 60)">
-        <circle cx="0" cy="0" r="18" fill="none" stroke="#C8941A" strokeWidth="1" opacity="0.5" />
-        <polygon points="0,-14 3,-4 0,-8 -3,-4" fill="#C8941A" opacity="0.8" />
-        <polygon points="0,14 3,4 0,8 -3,4" fill="#FAF3E088" opacity="0.5" />
-        <polygon points="-14,0 -4,-3 -8,0 -4,3" fill="#FAF3E088" opacity="0.5" />
-        <polygon points="14,0 4,-3 8,0 4,3" fill="#FAF3E088" opacity="0.5" />
-        <text x="-2" y="-16" fontFamily="'Lato', sans-serif" fontSize="8" fill="#C8941A" fontWeight="700">N</text>
-      </g>
-    </svg>
+      <div style={{
+        position: 'absolute',
+        top: '45%',
+        left: '45%',
+        width: '12px',
+        height: '12px',
+        background: '#8B0000',
+        borderRadius: '50%',
+        boxShadow: '0 0 15px #8B0000',
+      }}>
+        <div style={{
+          position: 'absolute',
+          top: '-20px',
+          left: '15px',
+          whiteSpace: 'nowrap',
+          fontFamily: "'Cormorant Garamond', serif",
+          fontSize: '1rem',
+          fontWeight: 600,
+          color: '#E8B84B',
+          textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+        }}>
+          Thrissur ★
+        </div>
+      </div>
+    </div>
   );
 }
 
