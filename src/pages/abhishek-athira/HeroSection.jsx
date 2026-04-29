@@ -221,8 +221,12 @@ const Portrait = forwardRef(function Portrait({ src, name, side, zIndex = 3 }, r
       }}
     >
       <motion.div
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: side === 'right' ? 1.2 : 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, -10, 0] }}
+        transition={{ 
+          opacity: { duration: 1.2, delay: 1.6 },
+          y: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: side === 'right' ? 1.2 : 0 }
+        }}
         style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
         <img src={src} alt={name} className="aa-portrait-img" />
@@ -290,17 +294,34 @@ export default function HeroSection() {
       }}
     >
       {/* SVG wedding elements falling */}
-      {petals.map((p, i) => <FallingElement key={i} style={p} />)}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, delay: 1.8 }}
+      >
+        {petals.map((p, i) => <FallingElement key={i} style={p} />)}
+      </motion.div>
 
       {/* Subtle radial glow */}
-      <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none',
-        background: 'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%)',
-      }} />
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 0.8 }}
+        style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%)',
+        }} 
+      />
 
       {/* Botanical corner illustrations */}
-      <BotanicalCorner />
-      <BotanicalCorner flip />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, delay: 1.6 }}
+      >
+        <BotanicalCorner />
+        <BotanicalCorner flip />
+      </motion.div>
 
       {/* Portraits — slide in from opposite sides and meet at center */}
       <Portrait ref={groomRef} src={groomImg} name="Abhishek" side="left" zIndex={5} />
@@ -312,7 +333,7 @@ export default function HeroSection() {
           className="aa-eyebrow"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.7 }}
+          transition={{ duration: 0.9, delay: 2.2 }}
         >
           Together Forever
         </motion.span>
@@ -320,7 +341,7 @@ export default function HeroSection() {
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 2.6 }}
           style={{
             fontFamily: "'Playfair Display', serif",
             fontSize: 'clamp(3.5rem, 10vw, 7rem)',
@@ -335,7 +356,7 @@ export default function HeroSection() {
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.4 }}
+            transition={{ duration: 0.8, delay: 3.4 }}
             style={{
               display: 'block',
               fontFamily: "'Cormorant Garamond', serif",
@@ -356,7 +377,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 1.55 }}
+          transition={{ duration: 0.8, delay: 3.0 }}
         >
           <FloralDivider color="#C9A84C" className="aa-hero-divider flex justify-center" />
         </motion.div>
@@ -364,7 +385,7 @@ export default function HeroSection() {
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 1.7 }}
+          transition={{ duration: 0.9, delay: 3.2 }}
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontStyle: 'italic',
@@ -382,7 +403,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 1.9 }}
+          transition={{ duration: 0.9, delay: 3.4 }}
           style={{
             display: 'inline-flex',
             alignItems: 'center',

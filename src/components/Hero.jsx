@@ -57,7 +57,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 1.1 }}
           >
             <h1
               style={{
@@ -71,9 +71,14 @@ export default function Hero() {
               }}
             >
               Athira
-              <span style={{ display: 'block', fontSize: '0.45em', color: '#FAF3E0', fontStyle: 'italic', letterSpacing: '0.2em', margin: '0.2em 0' }}>
+              <motion.span
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 1.6 }}
+                style={{ display: 'block', fontSize: '0.45em', color: '#FAF3E0', fontStyle: 'italic', letterSpacing: '0.2em', margin: '0.2em 0' }}
+              >
                 &amp;
-              </span>
+              </motion.span>
               Abhishek
             </h1>
           </motion.div>

@@ -1,6 +1,7 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, lazy, Suspense, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EnvelopeVideoIntro from './components/EnvelopeVideoIntro';
+import getBGM from './utils/audio';
 
 const AbhishekAthiraCard = lazy(() => import('./pages/AbhishekAthiraCard'));
 
@@ -25,10 +26,32 @@ function Loader() {
 export default function App() {
   const [introDone, setIntroDone] = useState(false);
 
+  useEffect(() => {
+    const bgm = getBGM();
+    // On desktop, the intro is skipped, so we need a global interaction to start music
+    const startMusic = () => {
+      if (bgm) bgm.play().catch(() => {});
+      document.removeEventListener('click', startMusic);
+      document.removeEventListener('touchstart', startMusic);
+    };
+
+    document.addEventListener('click', startMusic);
+    document.addEventListener('touchstart', startMusic);
+
+    return () => {
+      document.removeEventListener('click', startMusic);
+      document.removeEventListener('touchstart', startMusic);
+    };
+  }, []);
+
   return (
     <>
       {!introDone && (
-        <EnvelopeVideoIntro onComplete={() => setIntroDone(true)} />
+        <EnvelopeVideoIntro onComplete={() => {
+          setIntroDone(true);
+          const bgm = getBGM();
+          if (bgm) bgm.play().catch(() => {});
+        }} />
       )}
 
       {/* Pre-load card hidden; fade it in once intro completes */}
