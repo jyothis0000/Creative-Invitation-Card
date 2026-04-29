@@ -8,10 +8,10 @@ function AddToCalendarButton() {
   const [hovered, setHovered] = useState(false);
 
   function openCalendar() {
-    const text     = encodeURIComponent("Athira & Abhishek's Wedding");
-    const details  = encodeURIComponent("You're invited to celebrate the wedding of Athira & Abhishek. Join us for a joyous celebration!");
+    const text = encodeURIComponent("Athira & Abhishek's Wedding");
+    const details = encodeURIComponent("You're invited to celebrate the wedding of Athira & Abhishek. Join us for a joyous celebration!");
     const location = encodeURIComponent('Vienna, Austria');
-    const dates    = '20260524T140000/20260524T180000';
+    const dates = '20260524T140000/20260524T180000';
     const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}&location=${location}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   }
@@ -40,13 +40,13 @@ function AddToCalendarButton() {
     >
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
         <rect x="3" y="4" width="18" height="17" rx="2"
-          stroke={hovered ? '#1B3A2D' : '#C9A84C'} strokeWidth="1.8" fill="none"/>
+          stroke={hovered ? '#1B3A2D' : '#C9A84C'} strokeWidth="1.8" fill="none" />
         <path d="M3 9h18"
-          stroke={hovered ? '#1B3A2D' : '#C9A84C'} strokeWidth="1.8" strokeLinecap="round"/>
+          stroke={hovered ? '#1B3A2D' : '#C9A84C'} strokeWidth="1.8" strokeLinecap="round" />
         <path d="M8 2v4M16 2v4"
-          stroke={hovered ? '#1B3A2D' : '#C9A84C'} strokeWidth="1.8" strokeLinecap="round"/>
+          stroke={hovered ? '#1B3A2D' : '#C9A84C'} strokeWidth="1.8" strokeLinecap="round" />
         <rect x="7.5" y="13" width="2.5" height="2.5" rx="0.4"
-          fill={hovered ? '#1B3A2D' : '#C9A84C'}/>
+          fill={hovered ? '#1B3A2D' : '#C9A84C'} />
       </svg>
       <span style={{
         fontFamily: "'Lato', sans-serif",
@@ -128,10 +128,13 @@ function CelebrationBurst() {
 /* ─── Individual scratch tile ───────────────────────────────── */
 function ScratchTile({ value, label, delay }) {
   const canvasRef = useRef(null);
-  const drawing = useRef(false);
-  const revealed = useRef(false);
-  const [done, setDone] = useState(false);
-  const [burst, setBurst] = useState(false);
+  const maskRef   = useRef(null); // in-memory: white=covered, transparent=scratched
+  const baseRef   = useRef(null); // pre-rendered static gold base
+  const rafRef    = useRef(null);
+  const drawing   = useRef(false);
+  const revealed  = useRef(false);
+  const [done, setDone]       = useState(false);
+  const [burst, setBurst]     = useState(false);
   const [glowing, setGlowing] = useState(false);
   const [flipNum, setFlipNum] = useState(false);
   const prevVal = useRef(value);
@@ -146,81 +149,87 @@ function ScratchTile({ value, label, delay }) {
     }
   }, [value, done]);
 
-  /* Draw gold glowing scratch overlay once on mount */
+  /* Live shimmer animation loop */
   useEffect(() => {
     if (done) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const w = canvas.width, h = canvas.height;
-    ctx.globalCompositeOperation = 'source-over';
 
-    // 1. Metallic gold diagonal gradient
-    const gold = ctx.createLinearGradient(0, 0, w, h);
-    gold.addColorStop(0,    '#6B4C0F');
-    gold.addColorStop(0.22, '#B8871E');
-    gold.addColorStop(0.44, '#E8C84A');
-    gold.addColorStop(0.5,  '#FFF5A8');
-    gold.addColorStop(0.56, '#E8C84A');
-    gold.addColorStop(0.78, '#B8871E');
-    gold.addColorStop(1,    '#6B4C0F');
-    ctx.fillStyle = gold;
-    ctx.fillRect(0, 0, w, h);
+    // In-memory scratch mask (white = covered, transparent = scratched)
+    const mask = document.createElement('canvas');
+    mask.width = 120; mask.height = 120;
+    const mCtx = mask.getContext('2d');
+    mCtx.fillStyle = 'white';
+    mCtx.fillRect(0, 0, 120, 120);
+    maskRef.current = mask;
 
-    // 2. Diagonal scratch-line texture
-    for (let i = -h; i < w + h; i += 5) {
-      ctx.beginPath();
-      ctx.moveTo(i, 0);
-      ctx.lineTo(i + h, h);
-      ctx.strokeStyle = 'rgba(0,0,0,0.045)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
+    // Pre-render static gold base once (reused every frame for performance)
+    const base = document.createElement('canvas');
+    base.width = 120; base.height = 120;
+    const b = base.getContext('2d');
+    const W = 120, H = 120;
+
+    // Flat gold base — no static bright spot, only the animated sweep provides shine
+    b.fillStyle = '#C9A84C';
+    b.fillRect(0, 0, W, H);
+
+    for (let i = -H; i < W + H; i += 5) {
+      b.beginPath(); b.moveTo(i, 0); b.lineTo(i + H, H);
+      b.strokeStyle = 'rgba(0,0,0,0.045)'; b.lineWidth = 1; b.stroke();
     }
 
-    // 3. Top gloss highlight
-    const gloss = ctx.createLinearGradient(0, 0, 0, h * 0.52);
-    gloss.addColorStop(0, 'rgba(255,255,255,0.48)');
-    gloss.addColorStop(1, 'transparent');
-    ctx.fillStyle = gloss;
-    ctx.fillRect(0, 0, w, h * 0.52);
+    b.strokeStyle = 'rgba(255,255,255,0.55)'; b.lineWidth = 1;
+    b.strokeRect(4, 4, W - 8, H - 8);
+    b.strokeStyle = 'rgba(80,45,0,0.25)'; b.lineWidth = 1;
+    b.strokeRect(6, 6, W - 12, H - 12);
 
-    // 4. Diagonal shimmer streak
-    const streak = ctx.createLinearGradient(w * 0.15, 0, w * 0.65, h);
-    streak.addColorStop(0,    'transparent');
-    streak.addColorStop(0.42, 'transparent');
-    streak.addColorStop(0.5,  'rgba(255,255,255,0.28)');
-    streak.addColorStop(0.58, 'transparent');
-    streak.addColorStop(1,    'transparent');
-    ctx.fillStyle = streak;
-    ctx.fillRect(0, 0, w, h);
+    b.shadowColor = 'rgba(255,200,60,0.7)'; b.shadowBlur = 8;
+    b.fillStyle = 'rgba(45,25,0,0.85)';
+    b.font = 'bold 15px Lato, sans-serif';
+    b.textAlign = 'center'; b.textBaseline = 'middle';
+    b.fillText('✶ SCRATCH ✶', W / 2, H / 2 - 13);
+    b.shadowBlur = 0;
+    b.font = '12px Lato, sans-serif';
+    b.fillStyle = 'rgba(45,25,0,0.65)';
+    b.fillText('TO REVEAL', W / 2, H / 2 + 14);
 
-    // 5. Bottom depth shadow
-    const depth = ctx.createLinearGradient(0, h * 0.5, 0, h);
-    depth.addColorStop(0, 'transparent');
-    depth.addColorStop(1, 'rgba(0,0,0,0.18)');
-    ctx.fillStyle = depth;
-    ctx.fillRect(0, h * 0.5, w, h * 0.5);
+    baseRef.current = base;
 
-    // 6. Double inner border (white + dark)
-    ctx.strokeStyle = 'rgba(255,255,255,0.55)';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(4, 4, w - 8, h - 8);
-    ctx.strokeStyle = 'rgba(80,45,0,0.25)';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(6, 6, w - 12, h - 12);
+    // RAF loop — sweeps a right-tilted shine strip across every frame
+    let shimmerX = -80;
+    let frameId;
 
-    // 7. "SCRATCH" label
-    ctx.shadowColor = 'rgba(255,200,60,0.6)';
-    ctx.shadowBlur  = 6;
-    ctx.fillStyle   = 'rgba(45,25,0,0.82)';
-    ctx.font        = 'bold 9px Lato, sans-serif';
-    ctx.textAlign   = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('✶ SCRATCH ✶', w / 2, h / 2 - 9);
-    ctx.shadowBlur  = 0;
-    ctx.font        = '7.5px Lato, sans-serif';
-    ctx.fillStyle   = 'rgba(45,25,0,0.6)';
-    ctx.fillText('TO REVEAL', w / 2, h / 2 + 9);
+    function frame() {
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.drawImage(baseRef.current, 0, 0);
+
+      shimmerX += 1.4;
+      if (shimmerX > W + 80) shimmerX = -80;
+
+      ctx.save();
+      ctx.transform(1, 0, 0.4, 1, 0, 0); // right-leaning tilt
+      const grad = ctx.createLinearGradient(shimmerX - 55, 0, shimmerX + 55, 0);
+      grad.addColorStop(0,   'rgba(255,255,255,0)');
+      grad.addColorStop(0.3, 'rgba(255,248,180,0.2)');
+      grad.addColorStop(0.5, 'rgba(255,255,255,0.58)');
+      grad.addColorStop(0.7, 'rgba(255,248,180,0.2)');
+      grad.addColorStop(1,   'rgba(255,255,255,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(shimmerX - 55, -20, 110, H + 40);
+      ctx.restore();
+
+      // Clip to scratch mask (destination-in hides scratched areas)
+      ctx.globalCompositeOperation = 'destination-in';
+      ctx.drawImage(maskRef.current, 0, 0);
+
+      frameId = requestAnimationFrame(frame);
+    }
+
+    frameId = requestAnimationFrame(frame);
+    rafRef.current = frameId;
+    return () => cancelAnimationFrame(frameId);
   }, [done]);
 
   const getXY = (e, canvas) => {
@@ -233,24 +242,22 @@ function ScratchTile({ value, label, delay }) {
   };
 
   const scratch = useCallback((x, y) => {
-    if (revealed.current) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    if (revealed.current || !maskRef.current) return;
+    const mask = maskRef.current;
+    const ctx = mask.getContext('2d');
     ctx.globalCompositeOperation = 'destination-out';
     ctx.beginPath();
     ctx.arc(x, y, 24, 0, Math.PI * 2);
     ctx.fill();
 
-    // Check % revealed
-    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    const data = ctx.getImageData(0, 0, mask.width, mask.height).data;
     let transparent = 0;
     for (let i = 3; i < data.length; i += 4) {
       if (data[i] < 64) transparent++;
     }
-    const pct = (transparent / (data.length / 4)) * 100;
-    if (pct > 45) {
+    if ((transparent / (data.length / 4)) * 100 > 45) {
       revealed.current = true;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      cancelAnimationFrame(rafRef.current);
       setDone(true);
       setBurst(true);
       setGlowing(true);
@@ -259,11 +266,11 @@ function ScratchTile({ value, label, delay }) {
     }
   }, []);
 
-  const onDown = (e) => { drawing.current = true; const p = getXY(e, canvasRef.current); scratch(p.x, p.y); };
-  const onMove = (e) => { if (!drawing.current) return; const p = getXY(e, canvasRef.current); scratch(p.x, p.y); };
-  const onUp = () => { drawing.current = false; };
+  const onDown   = (e) => { drawing.current = true; const p = getXY(e, canvasRef.current); scratch(p.x, p.y); };
+  const onMove   = (e) => { if (!drawing.current) return; const p = getXY(e, canvasRef.current); scratch(p.x, p.y); };
+  const onUp     = () => { drawing.current = false; };
   const onTStart = (e) => { e.preventDefault(); onDown(e); };
-  const onTMove = (e) => { e.preventDefault(); onMove(e); };
+  const onTMove  = (e) => { e.preventDefault(); onMove(e); };
 
   return (
     <motion.div
@@ -277,8 +284,8 @@ function ScratchTile({ value, label, delay }) {
         boxShadow: glowing
           ? '0 0 0 2px #C9A84C, 0 0 28px rgba(201,168,76,0.65), 0 0 60px rgba(201,168,76,0.3)'
           : !done
-          ? '0 0 0 1px rgba(201,168,76,0.5), 0 4px 18px rgba(201,168,76,0.3), 0 0 40px rgba(201,168,76,0.15)'
-          : undefined,
+            ? '0 0 0 1px rgba(201,168,76,0.5), 0 4px 18px rgba(201,168,76,0.3), 0 0 40px rgba(201,168,76,0.15)'
+            : undefined,
         transition: 'box-shadow 0.4s ease',
       }}
     >
@@ -297,7 +304,7 @@ function ScratchTile({ value, label, delay }) {
         <span className="aa-countdown-label">{label}</span>
       </div>
 
-      {/* Canvas scratch layer */}
+      {/* Canvas scratch layer — drawn by RAF loop */}
       {!done && (
         <canvas
           ref={canvasRef}
