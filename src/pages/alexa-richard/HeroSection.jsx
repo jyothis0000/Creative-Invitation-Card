@@ -1,7 +1,13 @@
+import { useRef, forwardRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import FloralDivider from './FloralDivider';
 import brideImg from '../../assets/bride.png';
 import groomImg from '../../assets/groom.png';
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ── Detailed botanical corner illustration ── */
 function BotanicalCorner({ flip = false }) {
@@ -198,18 +204,16 @@ function FallingElement({ style }) {
   );
 }
 
-/* ── Portrait: transparent cutout, absolutely positioned on the side ── */
-function Portrait({ src, name, side, delay }) {
+/* ── Portrait: starts at the side edges, GSAP ScrollTrigger slides to center ── */
+const Portrait = forwardRef(function Portrait({ src, name, side }, ref) {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: side === 'left' ? -80 : 80 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay }}
+    <div
+      ref={ref}
       style={{
         position: 'absolute',
         bottom: 0,
-        [side]: 0,
-        zIndex: 99,
+        [side]: 0,           /* groom: left:0  bride: right:0 — visible from page load */
+        zIndex: 3,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -224,13 +228,49 @@ function Portrait({ src, name, side, delay }) {
         <img src={src} alt={name} className="ar-portrait-img" />
         <span className="ar-portrait-label">{name}</span>
       </motion.div>
-    </motion.div>
+    </div>
   );
-}
+});
 
 export default function HeroSection() {
+  const sectionRef = useRef(null);
+  const groomRef = useRef(null);
+  const brideRef = useRef(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: '+=900',
+        scrub: 1.5,
+        pin: true,
+        pinSpacing: true,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    /*
+     * Both images start at their natural side edges (left:0 / right:0).
+     * Each slides inward so their inner edges end up ~30px apart at the center.
+     * Function values recalculate on resize via invalidateOnRefresh.
+     */
+    const gap = -90; // half the gap between images at center (px)
+
+    tl.to(groomRef.current, {
+      x: () => sectionRef.current.offsetWidth / 2 - groomRef.current.offsetWidth - gap,
+      ease: 'power2.out',
+      duration: 1,
+    }).to(brideRef.current, {
+      x: () => -(sectionRef.current.offsetWidth / 2 - brideRef.current.offsetWidth - gap),
+      ease: 'power2.out',
+      duration: 1,
+    }, '<');
+  }, { scope: sectionRef });
+
   return (
     <section
+      ref={sectionRef}
       id="ar-hero"
       style={{
         minHeight: '100vh',
@@ -257,9 +297,9 @@ export default function HeroSection() {
       <BotanicalCorner />
       <BotanicalCorner flip />
 
-      {/* Portraits — absolutely positioned left & right */}
-      <Portrait src={groomImg} name="Richard" side="left" delay={0.2} />
-      <Portrait src={brideImg} name="Alexa" side="right" delay={0.4} />
+      {/* Portraits — slide in from opposite sides and meet at center */}
+      <Portrait ref={groomRef} src={groomImg} name="Richard" side="left" />
+      <Portrait ref={brideRef} src={brideImg} name="Alexa" side="right" />
 
       {/* Main content */}
       <div className="ar-hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center', width: '100%' }}>
