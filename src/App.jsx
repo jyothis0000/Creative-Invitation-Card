@@ -39,7 +39,7 @@ export default function App() {
               key="card"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1.2, ease: 'easeIn' }}
+              transition={{ duration: 0.4, ease: 'easeIn' }}
             >
               <Suspense fallback={<Loader />}>
                 <AlexaRichardCard />

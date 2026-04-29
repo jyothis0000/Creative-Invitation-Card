@@ -1,16 +1,22 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import cardVideo from '../assets/envlope.mp4';
+
+const isDesktop = () => window.innerWidth >= 768;
 
 export default function VideoIntro({ onComplete }) {
   const videoRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [fading, setFading] = useState(false);
 
+  useEffect(() => {
+    if (isDesktop()) onComplete();
+  }, []);
+
   function finish() {
     if (fading) return;
     setFading(true);
-    setTimeout(onComplete, 800);
+    setTimeout(onComplete, 300);
   }
 
   function handleClick() {
@@ -22,7 +28,7 @@ export default function VideoIntro({ onComplete }) {
   return (
     <motion.div
       animate={{ opacity: fading ? 0 : 1 }}
-      transition={{ duration: 0.8, ease: 'easeInOut' }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
       onClick={!playing ? handleClick : undefined}
       style={{
         position: 'fixed', inset: 0, zIndex: 9999,
