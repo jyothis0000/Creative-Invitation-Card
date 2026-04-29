@@ -1,4 +1,6 @@
-import { lazy, Suspense } from 'react';
+import { useState, lazy, Suspense } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import EnvelopeVideoIntro from './components/EnvelopeVideoIntro';
 
 const AlexaRichardCard = lazy(() => import('./pages/AlexaRichardCard'));
 
@@ -21,9 +23,31 @@ function Loader() {
 }
 
 export default function App() {
+  const [introDone, setIntroDone] = useState(false);
+
   return (
-    <Suspense fallback={<Loader />}>
-      <AlexaRichardCard />
-    </Suspense>
+    <>
+      {!introDone && (
+        <EnvelopeVideoIntro onComplete={() => setIntroDone(true)} />
+      )}
+
+      {/* Pre-load card hidden; fade it in once intro completes */}
+      <div style={{ visibility: introDone ? 'visible' : 'hidden' }}>
+        <AnimatePresence>
+          {introDone && (
+            <motion.div
+              key="card"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, ease: 'easeIn' }}
+            >
+              <Suspense fallback={<Loader />}>
+                <AlexaRichardCard />
+              </Suspense>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
   );
 }
