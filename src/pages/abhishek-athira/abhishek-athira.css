@@ -96,6 +96,7 @@
 .aa-btn--solid:hover {
   background: var(--aa-green-mid);
   border-color: var(--aa-green-mid);
+  color: var(--aa-gold);
 }
 
 /* ─── Gold Line ─────────────────────────────────────────────────────── */

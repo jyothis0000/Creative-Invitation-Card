@@ -45,6 +45,7 @@ export default function RSVPSection() {
   const [popupOpen, setPopupOpen] = useState(false);
   const [flying, setFlying] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [guestCount, setGuestCount] = useState(1);
 
   function openPopup(value) {
     setSelected(value);
@@ -84,7 +85,7 @@ export default function RSVPSection() {
       <div className="aa-container--narrow">
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <motion.span
+          {/* <motion.span
             className="aa-eyebrow"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -92,7 +93,7 @@ export default function RSVPSection() {
             transition={{ duration: 0.7 }}
           >
             Kindly Reply By April 1, 2026
-          </motion.span>
+          </motion.span> */}
           <motion.h2
             className="aa-heading"
             initial={{ opacity: 0, y: 20 }}
@@ -222,7 +223,7 @@ export default function RSVPSection() {
               </button>
 
               {/* Selected option badge */}
-              <div style={{
+              {/* <div style={{
                 display: 'flex', alignItems: 'center', gap: '0.75rem',
                 padding: '0.9rem 1.2rem',
                 background: 'var(--aa-ivory)',
@@ -241,11 +242,65 @@ export default function RSVPSection() {
                 }}>
                   {RSVP_OPTIONS.find(o => o.value === selected)?.label}
                 </span>
-              </div>
+              </div> */}
 
               <FloralDivider style={{ margin: '0 0 1.5rem' }} />
 
               <form onSubmit={handleSubmit}>
+                {selected === 'yes' && (
+                  <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'center', flexDirection: 'column' }}>
+                    <p style={{
+                      fontFamily: "'Lato', sans-serif",
+                      fontSize: '0.6rem',
+                      letterSpacing: '0.25em',
+                      textTransform: 'uppercase',
+                      color: 'var(--aa-text-muted)',
+                      marginBottom: '0.75rem',
+                    }}>
+                      Number of Guests
+                    </p>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'center' }}>
+                      <button
+                        type="button"
+                        onClick={() => setGuestCount(c => Math.max(1, c - 1))}
+                        style={{
+                          width: 36, height: 36,
+                          border: '1px solid rgba(201,168,76,0.5)',
+                          background: 'transparent',
+                          color: 'var(--aa-gold)',
+                          fontSize: '1.2rem',
+                          cursor: 'pointer',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          borderRadius: 2,
+                        }}
+                      >−</button>
+                      <span style={{
+                        fontFamily: "'Playfair Display', serif",
+                        fontSize: '1.6rem',
+                        fontWeight: 600,
+                        color: 'var(--aa-green)',
+                        minWidth: 28,
+                        textAlign: 'center',
+                      }}>
+                        {guestCount}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setGuestCount(c => Math.min(10, c + 1))}
+                        style={{
+                          width: 36, height: 36,
+                          border: '1px solid rgba(201,168,76,0.5)',
+                          background: 'transparent',
+                          color: 'var(--aa-gold)',
+                          fontSize: '1.2rem',
+                          cursor: 'pointer',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          borderRadius: 2,
+                        }}
+                      >+</button>
+                    </div>
+                  </div>
+                )}
                 <motion.button
                   type="submit"
                   className="aa-btn aa-btn--solid"
@@ -253,7 +308,7 @@ export default function RSVPSection() {
                   whileTap={{ scale: 0.97 }}
                   style={{ fontSize: '0.75rem', letterSpacing: '0.25em', width: '100%' }}
                 >
-                  Send My RSVP 💌
+                  Send My Reply 💌
                 </motion.button>
               </form>
             </motion.div>

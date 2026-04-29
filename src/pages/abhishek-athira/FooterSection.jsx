@@ -58,6 +58,8 @@ export default function FooterSection() {
             Abhishek &amp; Athira
           </h2>
         </motion.div>
+        <FloralDivider color="#C9A84C" style={{ margin: '1.5rem 0' }} />
+
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -65,7 +67,6 @@ export default function FooterSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <FloralDivider color="#C9A84C" style={{ margin: '1.5rem 0' }} />
 
           <p style={{
             fontFamily: "'Cormorant Garamond', serif",
@@ -84,7 +85,7 @@ export default function FooterSection() {
             textTransform: 'uppercase',
             color: 'rgba(201,168,76,0.7)',
           }}>
-            — Emily Brontë
+            — Athira
           </span>
         </motion.div>
 
@@ -145,10 +146,11 @@ export default function FooterSection() {
         marginBottom: '1rem',
         fontFamily: "'Lato', sans-serif",
         fontSize: '0.85rem',
-        color: 'rgba(201,168,76,0.3)',
+        color: '#c9a84ca6',
         letterSpacing: '0.15em',
       }}>
-        Designed by ♥ Digitaalbuddha
+        Designed by ♥
+        <a href="https://digitalbulbuddha.com/" style={{ color: '#c9a84ca6', textDecoration: 'none' }}>Digitalbuddha</a>
       </p>
     </footer>
   );
