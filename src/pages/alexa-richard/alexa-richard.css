@@ -554,7 +554,7 @@
 
 /* ─── Hero Portraits — frameless transparent cutouts, sides of banner ── */
 .ar-portrait-img {
-  height: 360px;
+  height: 460px;
   width: auto;
   object-fit: contain;
   object-position: bottom center;
@@ -575,19 +575,18 @@
   margin-bottom: 0.75rem;
 }
 
-/* Hide on screens where there's no room to flank centre text */
 @media (max-width: 860px) {
-  .ar-portrait-img  { height: 240px; }
+  .ar-portrait-img  { height: 320px; }
 }
 
 @media (max-width: 640px) {
-  .ar-portrait-img  { height: 160px; }
-  .ar-portrait-label { font-size: 0.8rem; }
+  .ar-portrait-img  { height: 260px; }
+  .ar-portrait-label { font-size: 0.85rem; }
 }
 
 @media (max-width: 400px) {
-  .ar-portrait-img  { height: 120px; }
-  .ar-portrait-label { font-size: 0.72rem; }
+  .ar-portrait-img  { height: 210px; }
+  .ar-portrait-label { font-size: 0.78rem; }
 }
 
 

@@ -205,7 +205,7 @@ function FallingElement({ style }) {
 }
 
 /* ── Portrait: starts at the side edges, GSAP ScrollTrigger slides to center ── */
-const Portrait = forwardRef(function Portrait({ src, name, side }, ref) {
+const Portrait = forwardRef(function Portrait({ src, name, side, zIndex = 3 }, ref) {
   return (
     <div
       ref={ref}
@@ -213,7 +213,7 @@ const Portrait = forwardRef(function Portrait({ src, name, side }, ref) {
         position: 'absolute',
         bottom: 0,
         [side]: 0,           /* groom: left:0  bride: right:0 — visible from page load */
-        zIndex: 3,
+        zIndex,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -238,34 +238,39 @@ export default function HeroSection() {
   const brideRef = useRef(null);
 
   useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: '+=900',
-        scrub: 1.5,
-        pin: true,
-        pinSpacing: true,
-        invalidateOnRefresh: true,
-      },
-    });
+    const mm = gsap.matchMedia();
 
-    /*
-     * Both images start at their natural side edges (left:0 / right:0).
-     * Each slides inward so their inner edges end up ~30px apart at the center.
-     * Function values recalculate on resize via invalidateOnRefresh.
-     */
-    const gap = -90; // half the gap between images at center (px)
+    const buildTimeline = (gap, offScreen = false) => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: '+=900',
+          scrub: 1.5,
+          pin: true,
+          pinSpacing: true,
+          invalidateOnRefresh: true,
+        },
+      });
 
-    tl.to(groomRef.current, {
-      x: () => sectionRef.current.offsetWidth / 2 - groomRef.current.offsetWidth - gap,
-      ease: 'power2.out',
-      duration: 1,
-    }).to(brideRef.current, {
-      x: () => -(sectionRef.current.offsetWidth / 2 - brideRef.current.offsetWidth - gap),
-      ease: 'power2.out',
-      duration: 1,
-    }, '<');
+      const groomEnd = { x: () => sectionRef.current.offsetWidth / 2 - groomRef.current.offsetWidth - gap, ease: 'power2.out', duration: 1 };
+      const brideEnd = { x: () => -(sectionRef.current.offsetWidth / 2 - brideRef.current.offsetWidth - gap), ease: 'power2.out', duration: 1 };
+
+      if (offScreen) {
+        tl.fromTo(groomRef.current, { x: '-100vw' }, groomEnd)
+          .fromTo(brideRef.current, { x: '100vw' }, brideEnd, '<');
+      } else {
+        tl.to(groomRef.current, groomEnd)
+          .to(brideRef.current, brideEnd, '<');
+      }
+
+      return () => tl.kill();
+    };
+
+    mm.add('(min-width: 769px)', () => buildTimeline(-110, false));  // desktop — visible from start
+    mm.add('(max-width: 768px)', () => buildTimeline(-52, true));   // mobile — starts off-screen
+
+    return () => mm.revert();
   }, { scope: sectionRef });
 
   return (
@@ -298,8 +303,8 @@ export default function HeroSection() {
       <BotanicalCorner flip />
 
       {/* Portraits — slide in from opposite sides and meet at center */}
-      <Portrait ref={groomRef} src={groomImg} name="Richard" side="left" />
-      <Portrait ref={brideRef} src={brideImg} name="Alexa" side="right" />
+      <Portrait ref={groomRef} src={groomImg} name="Abhishek" side="left" zIndex={5} />
+      <Portrait ref={brideRef} src={brideImg} name="Athira" side="right" zIndex={4} />
 
       {/* Main content */}
       <div className="ar-hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center', width: '100%' }}>
