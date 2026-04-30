@@ -54,23 +54,31 @@ export default function App() {
         }} />
       )}
 
-      {/* Pre-load card hidden; fade it in once intro completes */}
-      <div style={{ visibility: introDone ? 'visible' : 'hidden', background: '#FAF7F2', minHeight: '100vh' }}>
-        <AnimatePresence>
-          {introDone && (
-            <motion.div
-              key="card"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.1, ease: 'easeOut' }}
-            >
-              <Suspense fallback={<Loader />}>
-                <AbhishekAthiraCard />
-              </Suspense>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      {/* Card — pre-loaded hidden, shown instantly once intro completes */}
+      <div style={{ visibility: introDone ? 'visible' : 'hidden' }}>
+        <Suspense fallback={<Loader />}>
+          <AbhishekAthiraCard />
+        </Suspense>
       </div>
+
+      {/* Cream fade-out overlay — sits on top and dissolves to reveal the banner */}
+      <AnimatePresence>
+        {introDone && (
+          <motion.div
+            key="cream-overlay"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            style={{
+              position: 'fixed', inset: 0,
+              background: '#efe9c0',
+              zIndex: 9998,
+              pointerEvents: 'none',
+            }}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }
