@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import getBGM from '../utils/audio';
-import cardVideo from '../assets/envlope-card.mp4';
+import cardVideo from '../assets/card.mp4';
 
 const isDesktop = () => window.innerWidth >= 768;
 
@@ -68,28 +68,30 @@ export default function VideoIntro({ onComplete }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            style={{ textAlign: 'center' }}
+            style={{ textAlign: 'center', marginTop: '15rem' }}
           >
-            {/* <p style={{
-              color: '#C9A84C',
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: '1.2rem',
-              letterSpacing: '0.1em',
-              textShadow: '0 2px 10px rgba(0,0,0,0.5)',
-            }}>
-              Tap to Open
-            </p> */}
-            {/* <motion.div
-              animate={{ y: [0, 8, 0], opacity: [0.4, 1, 0.4] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            <motion.div
+              animate={{ y: [0, -5, 0], opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ marginTop: '0.5rem', color: '#C9A84C', fontSize: '0.9rem' }}
+            >
+              ▲
+            </motion.div>
+            <motion.p
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
               style={{
-                width: 40, height: 40, border: '1px solid #C9A84C',
-                borderRadius: '50%', margin: '1rem auto',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#C9A84C',
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: '1.2rem',
+                letterSpacing: '0.1em',
+                textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+                margin: 0,
               }}
             >
-              <span style={{ color: '#C9A84C' }}>▼</span>
-            </motion.div> */}
+              Tap to Open
+            </motion.p>
+
           </motion.div>
         </div>
       )}
