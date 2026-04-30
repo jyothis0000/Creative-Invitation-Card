@@ -68,12 +68,12 @@ export default function VideoIntro({ onComplete }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            style={{ textAlign: 'center', marginTop: '15rem' }}
+            style={{ textAlign: 'center', marginTop: '17rem' }}
           >
             <motion.div
               animate={{ y: [0, -5, 0], opacity: [0.4, 1, 0.4] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ marginTop: '0.5rem', color: '#C9A84C', fontSize: '0.9rem' }}
+              style={{ marginTop: '0.5rem', color: '#c77a12', fontSize: '0.9rem' }}
             >
               ▲
             </motion.div>
@@ -81,7 +81,7 @@ export default function VideoIntro({ onComplete }) {
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
               style={{
-                color: '#C9A84C',
+                color: '#c77a12',
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: '1.2rem',
                 letterSpacing: '0.1em',
