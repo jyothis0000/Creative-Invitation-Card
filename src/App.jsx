@@ -55,14 +55,14 @@ export default function App() {
       )}
 
       {/* Pre-load card hidden; fade it in once intro completes */}
-      <div style={{ visibility: introDone ? 'visible' : 'hidden' }}>
+      <div style={{ visibility: introDone ? 'visible' : 'hidden', background: '#FAF7F2', minHeight: '100vh' }}>
         <AnimatePresence>
           {introDone && (
             <motion.div
               key="card"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, ease: 'easeIn' }}
+              transition={{ duration: 0.1, ease: 'easeOut' }}
             >
               <Suspense fallback={<Loader />}>
                 <AbhishekAthiraCard />

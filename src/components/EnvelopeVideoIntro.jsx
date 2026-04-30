@@ -22,7 +22,7 @@ export default function VideoIntro({ onComplete }) {
     const bgm = getBGM();
     if (bgm) bgm.play().catch(() => { });
     setFading(true);
-    setTimeout(onComplete, 300);
+    setTimeout(onComplete, 150);
   }
 
   function handleClick() {
