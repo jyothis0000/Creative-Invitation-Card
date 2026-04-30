@@ -150,7 +150,7 @@ export default function FooterSection() {
         letterSpacing: '0.15em',
       }}>
         Designed by ♥
-        <a href="https://digitalbulbuddha.in/" style={{ color: '#c9a84ca6', textDecoration: 'none' }}>Digitalbuddha</a>
+        <a href="https://digitalbuddha.in/" style={{ color: '#c9a84ca6', textDecoration: 'none' }}>Digitalbuddha</a>
       </p>
     </footer>
   );
