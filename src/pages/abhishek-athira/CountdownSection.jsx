@@ -6,9 +6,9 @@ const WEDDING_DATE = new Date('2026-05-24T14:00:00');
 
 /* ─── Static date revealed by scratching ─────────────────────── */
 const DATE_TILES = [
-  { key: 'day',   value: '24',  label: 'Day',   delay: 0.3 },
+  { key: 'day', value: '24', label: 'Day', delay: 0.3 },
   { key: 'month', value: 'May', label: 'Month', delay: 0.4 },
-  { key: 'year',  value: '2026',label: 'Year',  delay: 0.5 },
+  { key: 'year', value: '2026', label: 'Year', delay: 0.5 },
 ];
 
 /* ─── Pre-seeded confetti pieces (avoids Math.random on render) ─ */
@@ -34,7 +34,7 @@ function AddToCalendarButton() {
   function openCalendar() {
     const text = encodeURIComponent("Athira & Abhishek's Wedding");
     const details = encodeURIComponent("You're invited to celebrate the wedding of Athira & Abhishek. Join us for a joyous celebration!");
-    const location = encodeURIComponent('Vienna, Austria');
+    const location = encodeURIComponent('Oasis Grand, Taliparamba');
     const dates = '20260524T140000/20260524T180000';
     const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}&location=${location}`;
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -144,8 +144,8 @@ function CountdownPopup({ onClose }) {
   }, []);
 
   const nums = [
-    { value: time.days,    label: 'Days' },
-    { value: time.hours,   label: 'Hours' },
+    { value: time.days, label: 'Days' },
+    { value: time.hours, label: 'Hours' },
     { value: time.minutes, label: 'Mins' },
     { value: time.seconds, label: 'Secs' },
   ];
@@ -175,139 +175,139 @@ function CountdownPopup({ onClose }) {
         padding: '1rem',
         pointerEvents: 'none',
       }}>
-      <motion.div
-        initial={{ scale: 0.25, opacity: 0, y: 40 }}
-        animate={{ scale: 1,    opacity: 1, y: 0 }}
-        exit={{   scale: 0.85,  opacity: 0, y: 30 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-        style={{
-          position: 'relative',
-          pointerEvents: 'auto',
-          background: 'linear-gradient(155deg, #111A15 0%, #1B3A2D 100%)',
-          border: '1px solid rgba(201,168,76,0.4)',
-          borderRadius: 6,
-          padding: 'clamp(1.4rem, 5vw, 2.8rem) clamp(1.2rem, 6vw, 3rem)',
-          textAlign: 'center',
-          width: '100%',
-          maxWidth: 480,
-          boxShadow: '0 0 100px rgba(201,168,76,0.12), 0 40px 80px rgba(0,0,0,0.55)',
-          maxHeight: '90vh',
-          overflowY: 'auto',
-        }}
-      >
-        {/* Close */}
-        <button
-          onClick={onClose}
-          style={{
-            position: 'absolute', top: '0.9rem', right: '1rem',
-            background: 'transparent', border: 'none', cursor: 'pointer',
-            color: 'rgba(201,168,76,0.55)', fontSize: '1.1rem',
-            lineHeight: 1, padding: '0.2rem 0.4rem',
-          }}
-          aria-label="Close"
-        >
-          ✕
-        </button>
-
-        {/* Rings icon */}
         <motion.div
-          initial={{ scale: 0, rotate: -45 }}
-          animate={{ scale: 1,  rotate: 0 }}
-          transition={{ type: 'spring', stiffness: 220, damping: 14, delay: 0.1 }}
-          style={{ marginBottom: '1rem' }}
+          initial={{ scale: 0.25, opacity: 0, y: 40 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.85, opacity: 0, y: 30 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+          style={{
+            position: 'relative',
+            pointerEvents: 'auto',
+            background: 'linear-gradient(155deg, #111A15 0%, #1B3A2D 100%)',
+            border: '1px solid rgba(201,168,76,0.4)',
+            borderRadius: 6,
+            padding: 'clamp(1.4rem, 5vw, 2.8rem) clamp(1.2rem, 6vw, 3rem)',
+            textAlign: 'center',
+            width: '100%',
+            maxWidth: 480,
+            boxShadow: '0 0 100px rgba(201,168,76,0.12), 0 40px 80px rgba(0,0,0,0.55)',
+            maxHeight: '90vh',
+            overflowY: 'auto',
+          }}
         >
-          <svg width="52" height="30" viewBox="0 0 52 30" fill="none">
-            <circle cx="17" cy="15" r="13" stroke="#C9A84C"  strokeWidth="2.5" opacity="0.85" />
-            <circle cx="35" cy="15" r="13" stroke="#E8C97A"  strokeWidth="2.5" opacity="0.85" />
-          </svg>
+          {/* Close */}
+          <button
+            onClick={onClose}
+            style={{
+              position: 'absolute', top: '0.9rem', right: '1rem',
+              background: 'transparent', border: 'none', cursor: 'pointer',
+              color: 'rgba(201,168,76,0.55)', fontSize: '1.1rem',
+              lineHeight: 1, padding: '0.2rem 0.4rem',
+            }}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+
+          {/* Rings icon */}
+          <motion.div
+            initial={{ scale: 0, rotate: -45 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: 'spring', stiffness: 220, damping: 14, delay: 0.1 }}
+            style={{ marginBottom: '1rem' }}
+          >
+            <svg width="52" height="30" viewBox="0 0 52 30" fill="none">
+              <circle cx="17" cy="15" r="13" stroke="#C9A84C" strokeWidth="2.5" opacity="0.85" />
+              <circle cx="35" cy="15" r="13" stroke="#E8C97A" strokeWidth="2.5" opacity="0.85" />
+            </svg>
+          </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+            style={{
+              fontFamily: "'Lato', sans-serif",
+              fontSize: '0.58rem', letterSpacing: '0.38em',
+              textTransform: 'uppercase', color: '#C9A84C',
+              marginBottom: '0.3rem',
+            }}
+          >
+            Counting down to
+          </motion.p>
+
+          <motion.h3
+            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.22 }}
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: 'clamp(1.5rem, 4vw, 2.1rem)',
+              color: '#FAF7F2', fontWeight: 500,
+              marginBottom: '0.15rem',
+            }}
+          >
+            Abhishek &amp; Athira
+          </motion.h3>
+
+          <motion.p
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ delay: 0.28 }}
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontStyle: 'italic', fontSize: '0.95rem',
+              color: 'rgba(232,186,163,0.7)', marginBottom: '2rem',
+            }}
+          >
+            May 24, 2026 — Oasis Grand, Taliparamba
+          </motion.p>
+
+          {/* Live countdown numbers */}
+          <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            {nums.map(({ value, label }, i) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.07 }}
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+              >
+                <AnimatePresence mode="popLayout">
+                  <motion.span
+                    key={value}
+                    initial={{ y: -14, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 14, opacity: 0 }}
+                    transition={{ duration: 0.22 }}
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: 'clamp(2rem, 6vw, 2.8rem)',
+                      fontWeight: 600, color: '#C9A84C',
+                      lineHeight: 1, display: 'block',
+                      background: 'rgba(201,168,76,0.1)',
+                      borderRadius: 4,
+                      padding: '0.4rem 0.65rem',
+                      border: '1px solid rgba(201,168,76,0.22)',
+                      minWidth: 'clamp(3rem, 8vw, 3.8rem)',
+                      textAlign: 'center',
+                    }}
+                  >
+                    {String(value).padStart(2, '0')}
+                  </motion.span>
+                </AnimatePresence>
+                <span style={{
+                  fontFamily: "'Lato', sans-serif",
+                  fontSize: '0.5rem', letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(232,186,163,0.55)', marginTop: '0.4rem',
+                }}>
+                  {label}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+
+          <FloralDivider style={{ margin: '1.6rem 0 0.4rem' }} />
+          <AddToCalendarButton />
         </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.18 }}
-          style={{
-            fontFamily: "'Lato', sans-serif",
-            fontSize: '0.58rem', letterSpacing: '0.38em',
-            textTransform: 'uppercase', color: '#C9A84C',
-            marginBottom: '0.3rem',
-          }}
-        >
-          Counting down to
-        </motion.p>
-
-        <motion.h3
-          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.22 }}
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: 'clamp(1.5rem, 4vw, 2.1rem)',
-            color: '#FAF7F2', fontWeight: 500,
-            marginBottom: '0.15rem',
-          }}
-        >
-          Abhishek &amp; Athira
-        </motion.h3>
-
-        <motion.p
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          transition={{ delay: 0.28 }}
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontStyle: 'italic', fontSize: '0.95rem',
-            color: 'rgba(232,186,163,0.7)', marginBottom: '2rem',
-          }}
-        >
-          May 24, 2026 — Vienna, Austria
-        </motion.p>
-
-        {/* Live countdown numbers */}
-        <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          {nums.map(({ value, label }, i) => (
-            <motion.div
-              key={label}
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + i * 0.07 }}
-              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-            >
-              <AnimatePresence mode="popLayout">
-                <motion.span
-                  key={value}
-                  initial={{ y: -14, opacity: 0 }}
-                  animate={{ y: 0,   opacity: 1 }}
-                  exit={{    y:  14, opacity: 0 }}
-                  transition={{ duration: 0.22 }}
-                  style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: 'clamp(2rem, 6vw, 2.8rem)',
-                    fontWeight: 600, color: '#C9A84C',
-                    lineHeight: 1, display: 'block',
-                    background: 'rgba(201,168,76,0.1)',
-                    borderRadius: 4,
-                    padding: '0.4rem 0.65rem',
-                    border: '1px solid rgba(201,168,76,0.22)',
-                    minWidth: 'clamp(3rem, 8vw, 3.8rem)',
-                    textAlign: 'center',
-                  }}
-                >
-                  {String(value).padStart(2, '0')}
-                </motion.span>
-              </AnimatePresence>
-              <span style={{
-                fontFamily: "'Lato', sans-serif",
-                fontSize: '0.5rem', letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                color: 'rgba(232,186,163,0.55)', marginTop: '0.4rem',
-              }}>
-                {label}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-
-        <FloralDivider style={{ margin: '1.6rem 0 0.4rem' }} />
-        <AddToCalendarButton />
-      </motion.div>
       </div>
     </>
   );
@@ -365,13 +365,13 @@ function CelebrationBurst() {
 /* ─── Individual scratch tile ───────────────────────────────────── */
 function ScratchTile({ value, label, delay, onReveal }) {
   const canvasRef = useRef(null);
-  const maskRef   = useRef(null);
-  const baseRef   = useRef(null);
-  const rafRef    = useRef(null);
-  const drawing   = useRef(false);
-  const revealed  = useRef(false);
-  const [done,    setDone]    = useState(false);
-  const [burst,   setBurst]   = useState(false);
+  const maskRef = useRef(null);
+  const baseRef = useRef(null);
+  const rafRef = useRef(null);
+  const drawing = useRef(false);
+  const revealed = useRef(false);
+  const [done, setDone] = useState(false);
+  const [burst, setBurst] = useState(false);
   const [glowing, setGlowing] = useState(false);
 
   /* Shimmer RAF loop */
@@ -432,11 +432,11 @@ function ScratchTile({ value, label, delay, onReveal }) {
       ctx.save();
       ctx.transform(1, 0, 0.4, 1, 0, 0);
       const grad = ctx.createLinearGradient(shimmerX - 55, 0, shimmerX + 55, 0);
-      grad.addColorStop(0,   'rgba(255,255,255,0)');
+      grad.addColorStop(0, 'rgba(255,255,255,0)');
       grad.addColorStop(0.3, 'rgba(255,248,180,0.2)');
       grad.addColorStop(0.5, 'rgba(255,255,255,0.58)');
       grad.addColorStop(0.7, 'rgba(255,248,180,0.2)');
-      grad.addColorStop(1,   'rgba(255,255,255,0)');
+      grad.addColorStop(1, 'rgba(255,255,255,0)');
       ctx.fillStyle = grad;
       ctx.fillRect(shimmerX - 55, -20, 110, H + 40);
       ctx.restore();
@@ -457,14 +457,14 @@ function ScratchTile({ value, label, delay, onReveal }) {
     const src = e.touches?.[0] ?? e;
     return {
       x: (src.clientX - r.left) * (canvas.width / r.width),
-      y: (src.clientY - r.top)  * (canvas.height / r.height),
+      y: (src.clientY - r.top) * (canvas.height / r.height),
     };
   };
 
   const scratch = useCallback((x, y) => {
     if (revealed.current || !maskRef.current) return;
     const mask = maskRef.current;
-    const ctx  = mask.getContext('2d');
+    const ctx = mask.getContext('2d');
     ctx.globalCompositeOperation = 'destination-out';
     ctx.beginPath();
     ctx.arc(x, y, 24, 0, Math.PI * 2);
@@ -482,16 +482,16 @@ function ScratchTile({ value, label, delay, onReveal }) {
       setBurst(true);
       setGlowing(true);
       onReveal?.();
-      setTimeout(() => setBurst(false),   900);
+      setTimeout(() => setBurst(false), 900);
       setTimeout(() => setGlowing(false), 1800);
     }
   }, [onReveal]);
 
-  const onDown  = (e) => { drawing.current = true;  scratch(...Object.values(getXY(e, canvasRef.current))); };
-  const onMove  = (e) => { if (!drawing.current) return; scratch(...Object.values(getXY(e, canvasRef.current))); };
-  const onUp    = ()  => { drawing.current = false; };
+  const onDown = (e) => { drawing.current = true; scratch(...Object.values(getXY(e, canvasRef.current))); };
+  const onMove = (e) => { if (!drawing.current) return; scratch(...Object.values(getXY(e, canvasRef.current))); };
+  const onUp = () => { drawing.current = false; };
   const onTStart = (e) => { e.preventDefault(); onDown(e); };
-  const onTMove  = (e) => { e.preventDefault(); onMove(e); };
+  const onTMove = (e) => { e.preventDefault(); onMove(e); };
 
   return (
     <motion.div
@@ -547,7 +547,7 @@ function ScratchTile({ value, label, delay, onReveal }) {
 /* ─── Main section ──────────────────────────────────────────────── */
 export default function CountdownSection() {
   const [revealedCount, setRevealedCount] = useState(0);
-  const [showPopup,     setShowPopup]     = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleReveal = useCallback(() => {
     setRevealedCount(c => c + 1);

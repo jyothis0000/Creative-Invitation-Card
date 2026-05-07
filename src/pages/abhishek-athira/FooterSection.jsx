@@ -104,7 +104,7 @@ export default function FooterSection() {
             color: '#C9A84C',
             marginBottom: '0.5rem',
           }}>
-            May 24, 2026 — Vienna, Austria
+            May 24, 2026 — Oasis Grand, Taliparamba
           </p>
           <p style={{
             fontFamily: "'Cormorant Garamond', serif",
@@ -145,7 +145,7 @@ export default function FooterSection() {
       <p style={{
         marginBottom: '1rem',
         fontFamily: "'Lato', sans-serif",
-        fontSize: '0.85rem',
+        fontSize: '0.75rem',
         color: '#c9a84ca6',
         letterSpacing: '0.15em',
       }}>

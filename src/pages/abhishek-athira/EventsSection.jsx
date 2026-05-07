@@ -11,7 +11,7 @@ const events = [
         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
-    time: '5:30 PM',
+    time: '5:00 PM',
     name: 'Reception Begins',
     location: 'Oasis Grand Hall Entrance',
     desc: 'Guests arrive and are welcomed with traditional flower garlands, rose petals, and warm hospitality. Find your seats and soak in the festive atmosphere.',
@@ -48,7 +48,7 @@ const events = [
     ),
     time: '8:15 PM',
     name: 'Games & Entertainment',
-    location: 'Banquet Hall',
+    location: 'Main Stage',
     desc: 'An hour of fun-filled games and interactive entertainment for all guests — bringing laughter, friendly competition, and unforgettable memories.',
   },
   {

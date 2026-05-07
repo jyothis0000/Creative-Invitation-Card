@@ -397,7 +397,7 @@ export default function HeroSection() {
             letterSpacing: '0.04em',
           }}
         >
-          with great joy, we invite you to celebrate our wedding
+          with great joy, we invite you to celebrate our wedding reception
         </motion.p>
 
         <motion.div
