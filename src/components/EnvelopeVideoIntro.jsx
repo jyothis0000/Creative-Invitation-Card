@@ -59,41 +59,40 @@ export default function VideoIntro({ onComplete }) {
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
       />
       {!playing && (
-        <div style={{
-          position: 'absolute', inset: 0,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          pointerEvents: 'none',
-        }}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          style={{
+            position: 'absolute',
+            top: '75%',
+            left: 0, right: 0,
+            textAlign: 'center',
+            pointerEvents: 'none',
+          }}
+        >
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            style={{ textAlign: 'center', marginTop: '17rem' }}
+            animate={{ y: [0, -5, 0], opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ color: '#c77a12', fontSize: '0.9rem', marginBottom: '0.25rem' }}
           >
-            <motion.div
-              animate={{ y: [0, -5, 0], opacity: [0.4, 1, 0.4] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ marginTop: '0.5rem', color: '#c77a12', fontSize: '0.9rem' }}
-            >
-              ▲
-            </motion.div>
-            <motion.p
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-              style={{
-                color: '#c77a12',
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: '1.2rem',
-                letterSpacing: '0.1em',
-                textShadow: '0 2px 10px rgba(0,0,0,0.5)',
-                margin: 0,
-              }}
-            >
-              Tap to Open
-            </motion.p>
-
+            ▲
           </motion.div>
-        </div>
+          <motion.p
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              color: '#c77a12',
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: 'clamp(1rem, 3.5vw, 1.3rem)',
+              letterSpacing: '0.1em',
+              textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+              margin: 0,
+            }}
+          >
+            Tap to Open
+          </motion.p>
+        </motion.div>
       )}
     </motion.div>
   );

@@ -1,4 +1,4 @@
-import { useRef, forwardRef } from 'react';
+import { useRef, forwardRef, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -261,8 +261,8 @@ export default function HeroSection() {
       const brideEnd = { x: () => -(sectionRef.current.offsetWidth / 2 - brideRef.current.offsetWidth - gap), ease: 'power2.out', duration: 1 };
 
       if (offScreen) {
-        tl.fromTo(groomRef.current, { x: '-100vw' }, groomEnd)
-          .fromTo(brideRef.current, { x: '100vw' }, brideEnd, '<');
+        tl.fromTo(groomRef.current, { x: () => -window.innerWidth }, groomEnd)
+          .fromTo(brideRef.current, { x: () => window.innerWidth }, brideEnd, '<');
       } else {
         tl.to(groomRef.current, groomEnd)
           .to(brideRef.current, brideEnd, '<');
@@ -276,6 +276,19 @@ export default function HeroSection() {
 
     return () => mm.revert();
   }, { scope: sectionRef });
+
+  /* Force ScrollTrigger to re-measure after all assets load.
+     On first mobile visit images aren't decoded yet at GSAP init time,
+     so pin/end positions are wrong until a refresh recalculates them. */
+  useEffect(() => {
+    const refresh = () => ScrollTrigger.refresh();
+    if (document.readyState === 'complete') {
+      refresh();
+    } else {
+      window.addEventListener('load', refresh);
+      return () => window.removeEventListener('load', refresh);
+    }
+  }, []);
 
   return (
     <section
