@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloralDivider from './FloralDivider';
+import { supabase } from '../../lib/supabase';
 
 const RSVP_OPTIONS = [
   { value: 'yes', emoji: '🥂', label: 'Yes, I will attend!' },
@@ -56,11 +57,15 @@ export default function RSVPSection() {
     setPopupOpen(false);
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!selected) return;
     setPopupOpen(false);
     setFlying(true);
+    await supabase.from('rsvps').insert({
+      response: selected,
+      guest_count: selected === 'yes' ? guestCount : 0,
+    });
     setTimeout(() => { setFlying(false); setSubmitted(true); }, 1200);
   }
 
