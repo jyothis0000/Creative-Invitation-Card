@@ -1,38 +1,24 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloralDivider from './FloralDivider';
-
-/* Beautiful SVG gradient placeholders — replace src with real photos at /gallery/aa-N.png */
-function makeSvgPlaceholder(color1, color2, label) {
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'>
-    <defs>
-      <linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'>
-        <stop offset='0%' stop-color='${color1}'/>
-        <stop offset='100%' stop-color='${color2}'/>
-      </linearGradient>
-    </defs>
-    <rect width='100%' height='100%' fill='url(%23g)'/>
-    <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'
-      font-family='serif' font-size='28' fill='rgba(255,255,255,0.5)'>${label}</text>
-  </svg>`;
-  return `data:image/svg+xml;charset=utf-8,${svg.replace(/#/g, '%23').replace(/\n/g, '').replace(/\s+/g, ' ')}`;
-}
+import img1 from '../../assets/img1.jpg';
+import img2 from '../../assets/img2.jpg';
+import img3 from '../../assets/img3.jpg';
+import img4 from '../../assets/img4.jpg';
+import img5 from '../../assets/img5.jpg';
 
 const images = [
-  // { src: '/gallery/aa-1.png', fallback: makeSvgPlaceholder('%231B3A2D','%232D5740','Abhishek & Athira'), alt: 'Abhishek and Athira couple portrait', span: true },
-  { src: '/gallery/aa-2.png', fallback: makeSvgPlaceholder('%232D5740', '%23C9A84C', 'The Venue'), alt: 'Wedding venue chapel' },
-  { src: '/gallery/aa-3.png', fallback: makeSvgPlaceholder('%23E8BAA3', '%23C48D77', 'Reception'), alt: 'Reception table setting' },
-  { src: '/gallery/aa-4.png', fallback: makeSvgPlaceholder('%231B3A2D', '%23E8BAA3', 'Garden'), alt: 'Couple in garden' },
-  { src: '/gallery/aa-5.png', fallback: makeSvgPlaceholder('%23C9A84C', '%23E8C97A', 'The Cake'), alt: 'Wedding cake' },
-  { src: '/gallery/aa-6.png', fallback: makeSvgPlaceholder('%232D5740', '%23C9A84C', 'The Rings'), alt: 'Wedding rings' },
+  { src: img1, alt: 'Photo 1' },
+  { src: img4, alt: 'Photo 4' },
+  { src: img2, alt: 'Photo 2' },
+  { src: img3, alt: 'Photo 3' },
+  { src: img5, alt: 'Photo 5' },
 ];
 
-function GalleryImage({ src, fallback, alt, style }) {
-  const [errored, setErrored] = useState(false);
+function GalleryImage({ src, alt, style }) {
   return (
     <img
-      src={errored ? fallback : src}
-      onError={() => setErrored(true)}
+      src={src}
       alt={alt}
       loading="lazy"
       style={style}

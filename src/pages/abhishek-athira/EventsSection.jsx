@@ -5,65 +5,65 @@ const events = [
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
-    time: '1:00 PM',
-    name: 'Guest Arrival',
-    location: "St. Augustine's Church, Vienna",
-    desc: 'Doors open. Guests are welcomed with champagne and floral arrangements.',
+    time: '5:30 PM',
+    name: 'Reception Begins',
+    location: 'Oasis Grand Hall Entrance',
+    desc: 'Guests arrive and are welcomed with traditional flower garlands, rose petals, and warm hospitality. Find your seats and soak in the festive atmosphere.',
   },
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
       </svg>
     ),
-    time: '2:00 PM',
-    name: 'Wedding Ceremony',
-    location: "St. Augustine's Church, Vienna",
-    desc: 'An intimate ceremony where Athira and Abhishek exchange their vows and rings.',
+    time: '6:15 PM',
+    name: 'Bride & Groom Entry',
+    location: 'Main Stage',
+    desc: 'Abhishek and Athira make their grand entrance together, welcomed by cheers, music, and a shower of flower petals from family and friends.',
   },
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
-        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
-        <line x1="6" y1="1" x2="6" y2="4"/>
-        <line x1="10" y1="1" x2="10" y2="4"/>
-        <line x1="14" y1="1" x2="14" y2="4"/>
+        <path d="M9 18V5l12-2v13" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="18" cy="16" r="3" />
       </svg>
     ),
-    time: '4:00 PM',
-    name: 'Cocktail Hour',
-    location: 'Rose Garden Terrace',
-    desc: 'Enjoy signature cocktails, canapés, and live acoustic music in the garden.',
+    time: '7:15 PM',
+    name: 'Dance Performances',
+    location: 'Main Stage',
+    desc: 'Family and friends take the stage for an hour of joyful dance performances — from classic Malayalam film songs to modern beats celebrating the couple.',
   },
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.15 12 19.79 19.79 0 0 1 .08 3.41 2 2 0 0 1 2.03 1H5a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L6.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 20 16"/>
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
       </svg>
     ),
-    time: '6:00 PM',
-    name: 'Wedding Reception',
-    location: 'Grand Ballroom, Palais Coburg',
-    desc: 'Dinner, dancing, toasts, and cake cutting. A night to remember forever.',
+    time: '8:15 PM',
+    name: 'Games & Entertainment',
+    location: 'Banquet Hall',
+    desc: 'An hour of fun-filled games and interactive entertainment for all guests — bringing laughter, friendly competition, and unforgettable memories.',
   },
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <circle cx="12" cy="12" r="10"/>
-        <polygon points="10 8 16 12 10 16 10 8"/>
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <path d="M8 21h8M12 17v4" />
+        <circle cx="8.5" cy="10" r="1.5" fill="currentColor" stroke="none" />
+        <path d="M14.5 8.5l-2 2.5 1.5 1.5 2.5-3" />
       </svg>
     ),
-    time: '9:00 PM',
-    name: 'Fireworks & Farewell',
-    location: 'Palace Gardens',
-    desc: 'Send off the newlyweds beneath a sky lit with fireworks and dancing lanterns.',
+    time: '9:15 PM',
+    name: 'Photo Session',
+    location: 'Stage & Decorated Backdrop',
+    desc: 'Strike a pose! Group photos with family, friends, and the couple. Capture the night with the beautifully decorated stage as your backdrop.',
   },
 ];
 
@@ -73,7 +73,7 @@ export default function EventsSection() {
       id="aa-events"
       className="aa-section"
       style={{
-        background: 'linear-gradient(180deg, var(--aa-ivory) 0%, var(--aa-cream) 100%)',
+        background: '#FAF7F2',
       }}
     >
       <div className="aa-container">
@@ -96,7 +96,7 @@ export default function EventsSection() {
             transition={{ duration: 0.8, delay: 0.1 }}
             style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}
           >
-            The Day's Events
+            Reception Evening
           </motion.h2>
           <FloralDivider style={{ marginTop: '1.5rem' }} />
         </div>

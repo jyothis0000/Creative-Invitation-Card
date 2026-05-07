@@ -3,12 +3,12 @@ import './abhishek-athira/abhishek-athira.css';
 import HeroSection from './abhishek-athira/HeroSection';
 
 const CountdownSection = lazy(() => import('./abhishek-athira/CountdownSection'));
-const OurStorySection  = lazy(() => import('./abhishek-athira/OurStorySection'));
-const EventsSection    = lazy(() => import('./abhishek-athira/EventsSection'));
-const PhotoGallery     = lazy(() => import('./abhishek-athira/PhotoGallery'));
-const RSVPSection      = lazy(() => import('./abhishek-athira/RSVPSection'));
-const VenueSection     = lazy(() => import('./abhishek-athira/VenueSection'));
-const FooterSection    = lazy(() => import('./abhishek-athira/FooterSection'));
+// const OurStorySection = lazy(() => import('./abhishek-athira/OurStorySection'));
+const EventsSection = lazy(() => import('./abhishek-athira/EventsSection'));
+const PhotoGallery = lazy(() => import('./abhishek-athira/PhotoGallery'));
+const RSVPSection = lazy(() => import('./abhishek-athira/RSVPSection'));
+const VenueSection = lazy(() => import('./abhishek-athira/VenueSection'));
+const FooterSection = lazy(() => import('./abhishek-athira/FooterSection'));
 
 function SectionFallback() {
   return (
@@ -51,9 +51,9 @@ export default function AbhishekAthiraCard() {
         <CountdownSection />
       </Suspense>
 
-      <Suspense fallback={<SectionFallback />}>
+      {/* <Suspense fallback={<SectionFallback />}>
         <OurStorySection />
-      </Suspense>
+      </Suspense> */}
 
       <Suspense fallback={<SectionFallback />}>
         <EventsSection />

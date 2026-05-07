@@ -328,7 +328,7 @@ export default function HeroSection() {
       <Portrait ref={brideRef} src={brideImg} name="Athira" side="right" zIndex={4} />
 
       {/* Main content */}
-      <div className="aa-hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center', width: '100%' }}>
+      <div className="aa-hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center', width: '100%', paddingBottom: 'clamp(6rem, 18vw, 12rem)' }}>
         <motion.span
           className="aa-eyebrow"
           initial={{ opacity: 0, y: 16 }}
@@ -401,39 +401,37 @@ export default function HeroSection() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.1 }}
           style={{
-            display: 'inline-flex',
+            marginTop: '2.2rem',
+            display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            gap: '1rem',
-            marginTop: '2rem',
-            border: '1px solid rgba(201,168,76,0.5)',
-            padding: '0.7rem 2.2rem',
-            position: 'relative',
+            gap: '0.45rem',
+            pointerEvents: 'none',
           }}
         >
           <span style={{
-            fontFamily: "'Lato', sans-serif",
-            fontSize: '0.65rem',
-            letterSpacing: '0.35em',
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: 'italic',
+            fontSize: 'clamp(0.7rem, 1.8vw, 0.85rem)',
+            letterSpacing: '0.28em',
             textTransform: 'uppercase',
-            color: '#C9A84C',
-            fontWeight: 700,
+            color: 'rgba(201,168,76,0.7)',
+            fontWeight: 300,
           }}>
-            May 24, 2026
+            scroll to discover
           </span>
-          <span style={{ color: 'rgba(201,168,76,0.4)', fontSize: '0.8rem' }}>◆</span>
-          <span style={{
-            fontFamily: "'Lato', sans-serif",
-            fontSize: '0.65rem',
-            letterSpacing: '0.25em',
-            textTransform: 'uppercase',
-            color: 'rgba(232,186,163,0.85)',
-          }}>
-            Vienna, Austria
-          </span>
+          <motion.svg
+            width="18" height="28" viewBox="0 0 18 28" fill="none"
+            animate={{ y: [0, 7, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut', delay: 1.4 }}
+          >
+            <line x1="9" y1="0" x2="9" y2="20" stroke="#C9A84C" strokeWidth="1" strokeOpacity="0.6" />
+            <path d="M2 14 L9 22 L16 14" stroke="#C9A84C" strokeWidth="1.2" strokeOpacity="0.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          </motion.svg>
         </motion.div>
       </div>
     </section>
