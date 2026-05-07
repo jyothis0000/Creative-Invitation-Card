@@ -603,9 +603,10 @@
   color: rgba(232, 186, 163, 0.75);
   text-align: center;
   margin-top: 0.5rem;
-  letter-spacing: 0.1em;
   margin-bottom: 0.75rem;
-
+  padding: 0 1.2rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
 }
 
 @media (max-width: 860px) {

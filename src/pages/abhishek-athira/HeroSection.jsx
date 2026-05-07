@@ -230,8 +230,9 @@ const Portrait = forwardRef(function Portrait({ src, name, side, zIndex = 3 }, r
         style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
         <img src={src} alt={name} className="aa-portrait-img" />
-        <span className="aa-portrait-label">{name}</span>
       </motion.div>
+      {/* Name rendered outside the floating div so it sits flat and never collides */}
+      <span className="aa-portrait-label">{name}</span>
     </div>
   );
 });
@@ -272,7 +273,7 @@ export default function HeroSection() {
     };
 
     mm.add('(min-width: 769px)', () => buildTimeline(-110, false));  // desktop — visible from start
-    mm.add('(max-width: 768px)', () => buildTimeline(-52, true));   // mobile — starts off-screen
+    mm.add('(max-width: 768px)', () => buildTimeline(30, true));    // mobile — stop before center so names don't collide
 
     return () => mm.revert();
   }, { scope: sectionRef });
