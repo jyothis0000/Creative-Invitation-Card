@@ -212,7 +212,7 @@ const Portrait = forwardRef(function Portrait({ src, name, side, zIndex = 3 }, r
       style={{
         position: 'absolute',
         bottom: 0,
-        [side]: 0,           /* groom: left:0  bride: right:0 — visible from page load */
+        [side]: 0,
         zIndex,
         display: 'flex',
         flexDirection: 'column',
@@ -227,11 +227,9 @@ const Portrait = forwardRef(function Portrait({ src, name, side, zIndex = 3 }, r
           opacity: { duration: 1.0, delay: 0.3 },
           y: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: side === 'right' ? 0.4 : 0 }
         }}
-        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
         <img src={src} alt={name} className="aa-portrait-img" />
       </motion.div>
-      {/* Name rendered outside the floating div so it sits flat and never collides */}
       <span className="aa-portrait-label">{name}</span>
     </div>
   );
@@ -273,7 +271,7 @@ export default function HeroSection() {
     };
 
     mm.add('(min-width: 769px)', () => buildTimeline(-110, false));  // desktop — visible from start
-    mm.add('(max-width: 768px)', () => buildTimeline(30, true));    // mobile — stop before center so names don't collide
+    mm.add('(max-width: 768px)', () => buildTimeline(-50, true));   // mobile — slight overlap so names stay centered below each image
 
     return () => mm.revert();
   }, { scope: sectionRef });
