@@ -276,17 +276,32 @@ export default function HeroSection() {
     return () => mm.revert();
   }, { scope: sectionRef });
 
-  /* Force ScrollTrigger to re-measure after all assets load.
-     On first mobile visit images aren't decoded yet at GSAP init time,
-     so pin/end positions are wrong until a refresh recalculates them. */
+  /* Refresh ScrollTrigger once the portrait images have actually decoded.
+     groomRef/brideRef offsetWidth is 0 until the PNGs load, which makes
+     GSAP calculate the wrong end-x on first visit. Image load events give
+     us the earliest reliable moment to re-measure. */
   useEffect(() => {
-    const refresh = () => ScrollTrigger.refresh();
-    if (document.readyState === 'complete') {
-      refresh();
-    } else {
-      window.addEventListener('load', refresh);
-      return () => window.removeEventListener('load', refresh);
+    const doRefresh = () => ScrollTrigger.refresh();
+    const imgs = document.querySelectorAll('.aa-portrait-img');
+    let pending = 0;
+
+    imgs.forEach(img => {
+      if (!img.complete || img.naturalWidth === 0) {
+        pending++;
+        const onLoad = () => { pending--; if (pending === 0) doRefresh(); };
+        img.addEventListener('load', onLoad, { once: true });
+      }
+    });
+
+    // All images already cached — refresh immediately after paint
+    if (pending === 0) {
+      const raf = requestAnimationFrame(doRefresh);
+      return () => cancelAnimationFrame(raf);
     }
+
+    // Safety-net: if a load event somehow never fires, refresh after 800 ms
+    const fallback = setTimeout(doRefresh, 800);
+    return () => clearTimeout(fallback);
   }, []);
 
   return (
