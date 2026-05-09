@@ -54,16 +54,16 @@ const events = [
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" />
-        <circle cx="8.5" cy="10" r="1.5" fill="currentColor" stroke="none" />
-        <path d="M14.5 8.5l-2 2.5 1.5 1.5 2.5-3" />
+        <path d="M9 18V5l12-2v13" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="18" cy="16" r="3" />
+        <path d="M9 9l12-2" />
       </svg>
     ),
-    time: '9:15 PM',
-    name: 'Photo Session',
-    location: 'Stage & Decorated Backdrop',
-    desc: 'Strike a pose! Group photos with family, friends, and the couple. Capture the night with the beautifully decorated stage as your backdrop.',
+    time: '9:30 PM',
+    name: 'DJ Party',
+    location: 'Main Hall',
+    desc: 'The night comes alive! Dance the night away to the hottest tracks spun by our DJ. Let loose, celebrate, and make memories on the dance floor.',
   },
 ];
 
