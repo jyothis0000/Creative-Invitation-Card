@@ -4,7 +4,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import FloralDivider from './FloralDivider';
-import receptionMapImg from '../../assets/palais_coburg_map.png';
+import receptionMapImg from '../../assets/oasis_grand_map.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 

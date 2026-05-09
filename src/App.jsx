@@ -1,6 +1,6 @@
 import { useState, lazy, Suspense, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import EnvelopeVideoIntro from './components/EnvelopeVideoIntro';
+import EnvelopeVideoIntro from './components/abhishek-athira/EnvelopeVideoIntro';
 import getBGM from './utils/audio';
 
 const AbhishekAthiraCard = lazy(() => import('./pages/AbhishekAthiraCard'));

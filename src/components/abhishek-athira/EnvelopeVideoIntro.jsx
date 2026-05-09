@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import getBGM from '../utils/audio';
-import cardVideo from '../assets/card.mp4';
+import getBGM from '../../utils/audio';
+import cardVideo from '../../assets/card.mp4';
 
 const isDesktop = () => window.innerWidth >= 768;
 

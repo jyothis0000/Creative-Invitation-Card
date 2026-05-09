@@ -1,14 +1,14 @@
 import { lazy, Suspense, useEffect } from 'react';
-import './abhishek-athira/abhishek-athira.css';
-import HeroSection from './abhishek-athira/HeroSection';
+import '../components/abhishek-athira/abhishek-athira.css';
+import HeroSection from '../components/abhishek-athira/HeroSection';
 
-const CountdownSection = lazy(() => import('./abhishek-athira/CountdownSection'));
-// const OurStorySection = lazy(() => import('./abhishek-athira/OurStorySection'));
-const EventsSection = lazy(() => import('./abhishek-athira/EventsSection'));
-const PhotoGallery = lazy(() => import('./abhishek-athira/PhotoGallery'));
-const RSVPSection = lazy(() => import('./abhishek-athira/RSVPSection'));
-const VenueSection = lazy(() => import('./abhishek-athira/VenueSection'));
-const FooterSection = lazy(() => import('./abhishek-athira/FooterSection'));
+const CountdownSection = lazy(() => import('../components/abhishek-athira/CountdownSection'));
+// const OurStorySection = lazy(() => import('../components/abhishek-athira/OurStorySection'));
+const EventsSection = lazy(() => import('../components/abhishek-athira/EventsSection'));
+const PhotoGallery = lazy(() => import('../components/abhishek-athira/PhotoGallery'));
+const RSVPSection = lazy(() => import('../components/abhishek-athira/RSVPSection'));
+const VenueSection = lazy(() => import('../components/abhishek-athira/VenueSection'));
+const FooterSection = lazy(() => import('../components/abhishek-athira/FooterSection'));
 
 function SectionFallback() {
   return (
