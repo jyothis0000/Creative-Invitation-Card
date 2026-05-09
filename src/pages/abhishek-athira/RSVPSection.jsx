@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloralDivider from './FloralDivider';
 import { supabase } from '../../lib/supabase';
@@ -6,8 +6,16 @@ import { supabase } from '../../lib/supabase';
 const RSVP_OPTIONS = [
   { value: 'yes', emoji: '🥂', label: 'Yes, I will attend!' },
   { value: 'no', emoji: '😔', label: "Unfortunately, I can't" },
-  // { value: 'later', emoji: '⏳', label: "I'll tell you a bit later" },
 ];
+
+function getOrCreateVisitorId() {
+  let id = localStorage.getItem('aa_visitor_id');
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem('aa_visitor_id', id);
+  }
+  return id;
+}
 
 /* Confetti burst */
 function Confetti() {
@@ -46,7 +54,27 @@ export default function RSVPSection() {
   const [popupOpen, setPopupOpen] = useState(false);
   const [flying, setFlying] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [justSubmitted, setJustSubmitted] = useState(false);
   const [guestCount, setGuestCount] = useState(1);
+  const [changing, setChanging] = useState(false);
+
+  useEffect(() => {
+    async function checkExisting() {
+      const visitorId = getOrCreateVisitorId();
+      const { data } = await supabase
+        .from('rsvps')
+        .select('*')
+        .eq('visitor_id', visitorId)
+        .maybeSingle();
+
+      if (data) {
+        setSelected(data.response);
+        setGuestCount(data.guest_count || 1);
+        setSubmitted(true);
+      }
+    }
+    checkExisting();
+  }, []);
 
   function openPopup(value) {
     setSelected(value);
@@ -62,16 +90,30 @@ export default function RSVPSection() {
     if (!selected) return;
     setPopupOpen(false);
     setFlying(true);
-    await supabase.from('rsvps').insert({
-      response: selected,
-      guest_count: selected === 'yes' ? guestCount : 0,
-    });
-    setTimeout(() => { setFlying(false); setSubmitted(true); }, 1200);
+
+    const visitorId = getOrCreateVisitorId();
+    await supabase.from('rsvps').upsert(
+      {
+        visitor_id: visitorId,
+        response: selected,
+        guest_count: selected === 'yes' ? guestCount : 0,
+      },
+      { onConflict: 'visitor_id' }
+    );
+
+    setTimeout(() => {
+      setFlying(false);
+      setSubmitted(true);
+      setJustSubmitted(true);
+      setChanging(false);
+    }, 1200);
   }
+
+  const showForm = !submitted || changing;
 
   return (
     <section id="aa-rsvp" className="aa-section" style={{ background: 'var(--aa-ivory)' }}>
-      {submitted && <Confetti />}
+      {justSubmitted && <Confetti />}
 
       {/* Flying envelope animation */}
       {flying && (
@@ -90,15 +132,6 @@ export default function RSVPSection() {
       <div className="aa-container--narrow">
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          {/* <motion.span
-            className="aa-eyebrow"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            Kindly Reply By April 1, 2026
-          </motion.span> */}
           <motion.h2
             className="aa-heading"
             initial={{ opacity: 0, y: 20 }}
@@ -113,7 +146,7 @@ export default function RSVPSection() {
         </div>
 
         <AnimatePresence mode="wait">
-          {!submitted ? (
+          {showForm ? (
             <motion.div
               key="options"
               initial={{ opacity: 1 }}
@@ -187,9 +220,27 @@ export default function RSVPSection() {
                     ? "We'll miss you dearly — we'll think of you on the day."
                     : "Take your time — we'll be here whenever you're ready."}
               </p>
-              <p style={{ fontSize: '0.85rem', color: 'var(--aa-text-muted)' }}>
+              <p style={{ fontSize: '0.85rem', color: 'var(--aa-text-muted)', marginBottom: '1.75rem' }}>
                 — Abhishek & Athira
               </p>
+              <button
+                type="button"
+                onClick={() => { setChanging(true); setSubmitted(false); }}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid rgba(201,168,76,0.4)',
+                  color: 'var(--aa-text-muted)',
+                  fontSize: '0.7rem',
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  padding: '0.5rem 1.25rem',
+                  cursor: 'pointer',
+                  borderRadius: 2,
+                  fontFamily: "'Lato', sans-serif",
+                }}
+              >
+                Change My Response
+              </button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -206,7 +257,6 @@ export default function RSVPSection() {
             transition={{ duration: 0.25 }}
             onClick={closePopup}
           >
-            {/* Panel — child of backdrop so flex centering works */}
             <motion.div
               className="aa-popup"
               initial={{ opacity: 0, scale: 0.88, y: 40 }}
@@ -226,28 +276,6 @@ export default function RSVPSection() {
               >
                 ×
               </button>
-
-              {/* Selected option badge */}
-              {/* <div style={{
-                display: 'flex', alignItems: 'center', gap: '0.75rem',
-                padding: '0.9rem 1.2rem',
-                background: 'var(--aa-ivory)',
-                border: '1px solid rgba(201,168,76,0.3)',
-                borderRadius: 4,
-                marginBottom: '1.5rem',
-              }}>
-                <span style={{ fontSize: '1.5rem', lineHeight: 1 }}>
-                  {RSVP_OPTIONS.find(o => o.value === selected)?.emoji}
-                </span>
-                <span style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontStyle: 'italic',
-                  fontSize: '1.05rem',
-                  color: 'var(--aa-text-muted)',
-                }}>
-                  {RSVP_OPTIONS.find(o => o.value === selected)?.label}
-                </span>
-              </div> */}
 
               <FloralDivider style={{ margin: '0 0 1.5rem' }} />
 

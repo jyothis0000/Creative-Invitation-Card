@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloralDivider from './FloralDivider';
-import img1 from '../../assets/img1.jpg';
-import img2 from '../../assets/img2.jpg';
-import img3 from '../../assets/img3.jpg';
-import img4 from '../../assets/img4.jpg';
-import img5 from '../../assets/img5.jpg';
+import img1 from '../../assets/img1.jpeg';
+import img2 from '../../assets/img2.jpeg';
+import img3 from '../../assets/img3.jpeg';
+import img4 from '../../assets/img4.jpeg';
+import img5 from '../../assets/img5.jpeg';
 
 const images = [
   { src: img1, alt: 'Photo 1' },
@@ -19,13 +19,13 @@ const images = [
 const SLIDES = [images[images.length - 1], ...images, images[0]];
 
 export default function PhotoGallery() {
-  const [lightbox,    setLightbox]    = useState(null);
+  const [lightbox, setLightbox] = useState(null);
   const [activeSlide, setActiveSlide] = useState(0);
-  const sliderRef   = useRef(null);
-  const jumping     = useRef(false);
+  const sliderRef = useRef(null);
+  const jumping = useRef(false);
   const scrollTimer = useRef(null);
-  const autoTimer   = useRef(null);
-  const isPaused    = useRef(false);
+  const autoTimer = useRef(null);
+  const isPaused = useRef(false);
 
   /* On mount: position to first real slide (index 1, after the clone) */
   useEffect(() => {
@@ -102,17 +102,17 @@ export default function PhotoGallery() {
       smoothScroll(el, (current + 1) * el.offsetWidth);
     };
 
-    const pause  = () => { isPaused.current = true; };
+    const pause = () => { isPaused.current = true; };
     const resume = () => { isPaused.current = false; };
 
     autoTimer.current = setInterval(next, 4000);
-    el.addEventListener('touchstart', pause,  { passive: true });
-    el.addEventListener('touchend',   resume, { passive: true });
+    el.addEventListener('touchstart', pause, { passive: true });
+    el.addEventListener('touchend', resume, { passive: true });
 
     return () => {
       clearInterval(autoTimer.current);
       el.removeEventListener('touchstart', pause);
-      el.removeEventListener('touchend',   resume);
+      el.removeEventListener('touchend', resume);
     };
   }, []);
 

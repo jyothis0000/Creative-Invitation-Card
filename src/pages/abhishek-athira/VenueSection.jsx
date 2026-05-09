@@ -21,7 +21,7 @@ function ReceptionMap({ svgRef }) {
         <defs>
           <filter id="rm-glow" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="6" result="b" />
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
         </defs>
         <g data-rm="pin" opacity="0">
@@ -42,12 +42,12 @@ function CompassRose() {
   return (
     <svg width="38" height="38" viewBox="0 0 38 38"
       style={{ position: 'absolute', bottom: 12, right: 12, opacity: 0.7 }}>
-      <circle cx="19" cy="19" r="17" fill="rgba(11,24,16,0.7)" stroke="#C9A84C" strokeOpacity="0.45" strokeWidth="0.8"/>
-      <circle cx="19" cy="19" r="2.5" fill="#C9A84C"/>
-      <polygon points="19,3 17,15 21,15" fill="#E8C97A"/>
-      <polygon points="19,35 17,23 21,23" fill="#C9A84C" fillOpacity="0.5"/>
-      <polygon points="35,19 23,17 23,21" fill="#C9A84C" fillOpacity="0.5"/>
-      <polygon points="3,19 15,17 15,21" fill="#C9A84C" fillOpacity="0.5"/>
+      <circle cx="19" cy="19" r="17" fill="rgba(11,24,16,0.7)" stroke="#C9A84C" strokeOpacity="0.45" strokeWidth="0.8" />
+      <circle cx="19" cy="19" r="2.5" fill="#C9A84C" />
+      <polygon points="19,3 17,15 21,15" fill="#E8C97A" />
+      <polygon points="19,35 17,23 21,23" fill="#C9A84C" fillOpacity="0.5" />
+      <polygon points="35,19 23,17 23,21" fill="#C9A84C" fillOpacity="0.5" />
+      <polygon points="3,19 15,17 15,21" fill="#C9A84C" fillOpacity="0.5" />
       <text x="19" y="12" textAnchor="middle" fill="#E8C97A" fontSize="5.5" fontFamily="Lato" fontWeight="700">N</text>
     </svg>
   );
@@ -55,7 +55,7 @@ function CompassRose() {
 
 /* ─── Reception venue card ───────────────────────────────────────── */
 function ReceptionVenueCard() {
-  const svgRef  = useRef(null);
+  const svgRef = useRef(null);
   const cardRef = useRef(null);
 
   useGSAP(() => {
@@ -170,7 +170,7 @@ function ReceptionVenueCard() {
         </div>
 
         <a
-          href="https://maps.google.com/?q=Oasis+Grand+Thaliparamba"
+          href="https://maps.app.goo.gl/ptdNkW8A1XbaNmUC8"
           target="_blank" rel="noopener noreferrer"
           style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.45rem',
@@ -194,8 +194,8 @@ function ReceptionVenueCard() {
           }}
         >
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-            <circle cx="12" cy="10" r="3"/>
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
           </svg>
           Get Directions
         </a>
