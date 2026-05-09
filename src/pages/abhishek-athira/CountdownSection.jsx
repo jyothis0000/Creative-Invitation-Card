@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import FloralDivider from './FloralDivider';
 
-const WEDDING_DATE = new Date('2026-05-24T14:00:00');
+const WEDDING_DATE = new Date('2026-05-24T17:00:00');
 
 /* ─── Static date revealed by scratching ─────────────────────── */
 const DATE_TILES = [
@@ -31,18 +31,17 @@ const CONFETTI = Array.from({ length: 48 }, (_, i) => {
 function AddToCalendarButton() {
   const [hovered, setHovered] = useState(false);
 
-  function openCalendar() {
-    const text = encodeURIComponent("Athira & Abhishek's Wedding");
-    const details = encodeURIComponent("You're invited to celebrate the wedding of Athira & Abhishek. Join us for a joyous celebration!");
-    const location = encodeURIComponent('Oasis Grand, Taliparamba');
-    const dates = '20260524T140000/20260524T180000';
-    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}&location=${location}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  }
+  const text = encodeURIComponent("Abhishek & Athira's Reception");
+  const details = encodeURIComponent("You're invited to celebrate the reception of Athira & Abhishek. Join us for a joyous celebration!");
+  const location = encodeURIComponent('Oasis Grand, Taliparamba');
+  const dates = '20260524T170000/20260524T210000';
+  const calUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}&location=${location}`;
 
   return (
-    <motion.button
-      onClick={openCalendar}
+    <motion.a
+      href={calUrl}
+      target="_blank"
+      rel="noopener noreferrer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -56,6 +55,7 @@ function AddToCalendarButton() {
         cursor: 'pointer',
         transition: 'background 0.2s ease, color 0.2s ease',
         marginTop: '1.5rem',
+        textDecoration: 'none',
       }}
     >
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
@@ -80,7 +80,7 @@ function AddToCalendarButton() {
       }}>
         Add to Google Calendar
       </span>
-    </motion.button>
+    </motion.a>
   );
 }
 
