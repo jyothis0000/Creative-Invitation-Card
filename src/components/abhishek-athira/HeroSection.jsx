@@ -249,7 +249,7 @@ export default function HeroSection() {
           trigger: sectionRef.current,
           start: 'top top',
           end: '+=2400',
-          scrub: 2,
+          scrub: 0.5,
           pin: true,
           pinSpacing: true,
           invalidateOnRefresh: true,
