@@ -60,7 +60,7 @@ export default function FooterSection() {
         </motion.div>
         <FloralDivider color="#C9A84C" style={{ margin: '1.5rem 0' }} />
 
-
+        {/* 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,7 +87,7 @@ export default function FooterSection() {
           }}>
             — Athira
           </span>
-        </motion.div>
+        </motion.div> */}
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -149,8 +149,8 @@ export default function FooterSection() {
         color: '#c9a84ca6',
         letterSpacing: '0.15em',
       }}>
-        Designed by
-        <a href="https://digitalbuddha.in/" style={{ color: '#c9a84ca6', textDecoration: 'none' }}>&nbsp;Digitalbuddha</a>
+        Designed with ❤️ by
+        <a href="https://digitalbuddha.in/" style={{ color: '#c9a84ca6', textDecoration: 'none' }}>&nbsp;digitalbuddha</a>
       </p>
     </footer>
   );

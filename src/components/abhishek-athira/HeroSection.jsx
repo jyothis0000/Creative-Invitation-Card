@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import FloralDivider from './FloralDivider';
-import brideImg from '../../assets/bride.png';
+import brideImg from '../../assets/bride3.png';
 import groomImg from '../../assets/groom.png';
 
 gsap.registerPlugin(ScrollTrigger);
