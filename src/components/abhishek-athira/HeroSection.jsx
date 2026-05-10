@@ -248,16 +248,16 @@ export default function HeroSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: '+=900',
-          scrub: 1.5,
+          end: '+=2400',
+          scrub: 2,
           pin: true,
           pinSpacing: true,
           invalidateOnRefresh: true,
         },
       });
 
-      const groomEnd = { x: () => sectionRef.current.offsetWidth / 2 - groomRef.current.offsetWidth - gap, ease: 'power2.out', duration: 1 };
-      const brideEnd = { x: () => -(sectionRef.current.offsetWidth / 2 - brideRef.current.offsetWidth - gap), ease: 'power2.out', duration: 1 };
+      const groomEnd = { x: () => sectionRef.current.offsetWidth / 2 - groomRef.current.offsetWidth - gap, ease: 'power2.inOut', duration: 3 };
+      const brideEnd = { x: () => -(sectionRef.current.offsetWidth / 2 - brideRef.current.offsetWidth - gap), ease: 'power2.inOut', duration: 3 };
 
       if (offScreen) {
         tl.fromTo(groomRef.current, { x: () => -window.innerWidth }, groomEnd)
@@ -266,6 +266,9 @@ export default function HeroSection() {
         tl.to(groomRef.current, groomEnd)
           .to(brideRef.current, brideEnd, '<');
       }
+
+      // Hold at center — nothing moves here, giving the user scroll distance to admire the portraits
+      tl.to({}, { duration: 2.3 });
 
       return () => tl.kill();
     };
