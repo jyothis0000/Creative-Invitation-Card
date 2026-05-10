@@ -51,20 +51,20 @@ const events = [
     location: 'Main Stage',
     desc: 'An hour of fun-filled games and interactive entertainment for all guests — bringing laughter, friendly competition, and unforgettable memories.',
   },
-  {
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M9 18V5l12-2v13" />
-        <circle cx="6" cy="18" r="3" />
-        <circle cx="18" cy="16" r="3" />
-        <path d="M9 9l12-2" />
-      </svg>
-    ),
-    time: '9:30 PM',
-    name: 'DJ Party',
-    location: 'Main Hall',
-    desc: 'The night comes alive! Dance the night away to the hottest tracks spun by our DJ. Let loose, celebrate, and make memories on the dance floor.',
-  },
+  // {
+  //   icon: (
+  //     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+  //       <path d="M9 18V5l12-2v13" />
+  //       <circle cx="6" cy="18" r="3" />
+  //       <circle cx="18" cy="16" r="3" />
+  //       <path d="M9 9l12-2" />
+  //     </svg>
+  //   ),
+  //   time: '9:30 PM',
+  //   name: 'DJ Party',
+  //   location: 'Main Hall',
+  //   desc: 'The night comes alive! Dance the night away to the hottest tracks spun by our DJ. Let loose, celebrate, and make memories on the dance floor.',
+  // },
 ];
 
 export default function EventsSection() {
@@ -122,9 +122,9 @@ export default function EventsSection() {
                 <div className="aa-event-time" style={{ minWidth: 80, textAlign: 'right', paddingTop: '0.2rem' }}>
                   <span style={{
                     fontFamily: "'Playfair Display', serif",
-                    fontSize: '1rem',
+                    fontSize: '1.5rem',
                     fontWeight: 500,
-                    color: 'var(--aa-gold)',
+                    color: 'var(--aa-green)',
                     whiteSpace: 'nowrap',
                   }}>
                     {ev.time}

@@ -80,7 +80,14 @@ function ReceptionVenueCard() {
   }, { scope: cardRef });
 
   return (
-    <div ref={cardRef} className="aa-venue-card" style={{ maxWidth: 680, margin: '0 auto' }}>
+    <a
+      ref={cardRef}
+      href="https://maps.app.goo.gl/ptdNkW8A1XbaNmUC8"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="aa-venue-card"
+      style={{ maxWidth: 680, margin: '0 auto', display: 'block', textDecoration: 'none', cursor: 'pointer' }}
+    >
       {/* Map */}
       <div style={{ position: 'relative', height: 310 }}>
         <ReceptionMap svgRef={svgRef} />
@@ -138,7 +145,7 @@ function ReceptionVenueCard() {
         </p>
 
         {/* Timeline summary */}
-        <div style={{
+        {/* <div style={{
           display: 'flex', flexWrap: 'wrap', gap: '0.6rem',
           marginBottom: '1.4rem',
         }}>
@@ -147,7 +154,7 @@ function ReceptionVenueCard() {
             { t: '6:15 PM', label: 'Bride & Groom' },
             { t: '7:15 PM', label: 'Dance' },
             { t: '8:15 PM', label: 'Games' },
-            { t: '9:15 PM', label: 'Photos' },
+            // { t: '9:30 PM', label: 'Photos' },
           ].map(({ t, label }) => (
             <div key={t} style={{
               display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -167,7 +174,7 @@ function ReceptionVenueCard() {
               }}>{label}</span>
             </div>
           ))}
-        </div>
+        </div> */}
 
         <a
           href="https://maps.app.goo.gl/ptdNkW8A1XbaNmUC8"
@@ -200,7 +207,7 @@ function ReceptionVenueCard() {
           Get Directions
         </a>
       </div>
-    </div>
+    </a>
   );
 }
 

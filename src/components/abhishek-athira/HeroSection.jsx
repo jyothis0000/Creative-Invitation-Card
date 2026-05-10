@@ -356,6 +356,22 @@ export default function HeroSection() {
 
       {/* Main content */}
       <div className="aa-hero-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center', width: '100%', paddingBottom: 'clamp(6rem, 18vw, 12rem)' }}>
+
+        <div style={{
+          width: 90, height: 90, borderRadius: '50%',
+          border: '1.5px solid rgba(201,168,76,0.5)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          margin: '0 auto 1.5rem',
+        }}>
+          <span style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: '2rem',
+            color: '#C9A84C',
+            fontStyle: 'italic',
+          }}>
+            A&A
+          </span>
+        </div>
         <motion.span
           className="aa-eyebrow"
           initial={{ opacity: 0, y: 16 }}

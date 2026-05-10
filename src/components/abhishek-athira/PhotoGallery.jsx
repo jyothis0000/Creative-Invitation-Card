@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import FloralDivider from './FloralDivider';
 import img1 from '../../assets/img1.jpeg';
 import img2 from '../../assets/img2.jpeg';
@@ -19,7 +19,6 @@ const images = [
 const SLIDES = [images[images.length - 1], ...images, images[0]];
 
 export default function PhotoGallery() {
-  const [lightbox, setLightbox] = useState(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const sliderRef = useRef(null);
   const jumping = useRef(false);
@@ -142,16 +141,9 @@ export default function PhotoGallery() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              onClick={() => setLightbox(img)}
             >
               <img src={img.src} alt={img.alt}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }} />
-              <div className="aa-gallery-overlay">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-                  <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  <line x1="11" y1="8" x2="11" y2="14" /><line x1="8" y1="11" x2="14" y2="11" />
-                </svg>
-              </div>
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </motion.div>
           ))}
         </div>
@@ -160,19 +152,9 @@ export default function PhotoGallery() {
         <div className="aa-gallery-mobile">
           <div className="aa-gallery-slider" ref={sliderRef}>
             {SLIDES.map((img, i) => (
-              <div
-                key={i}
-                className="aa-gallery-slide"
-                onClick={() => setLightbox(img)}
-              >
+              <div key={i} className="aa-gallery-slide">
                 <img src={img.src} alt={img.alt}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                <div className="aa-gallery-overlay" style={{ opacity: 0.15 }}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-                    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-                    <line x1="11" y1="8" x2="11" y2="14" /><line x1="8" y1="11" x2="14" y2="11" />
-                  </svg>
-                </div>
               </div>
             ))}
           </div>
@@ -208,42 +190,6 @@ export default function PhotoGallery() {
           <span style={{ color: 'var(--aa-gold)', fontWeight: 600 }}>#AbhishekAndAthira</span>
         </motion.p>
       </div>
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightbox && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setLightbox(null)}
-            style={{
-              position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.92)',
-              zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              padding: '2rem', cursor: 'zoom-out',
-            }}
-          >
-            <motion.img
-              src={lightbox.src}
-              alt={lightbox.alt}
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
-              style={{ maxWidth: '90vw', maxHeight: '85vh', objectFit: 'contain', borderRadius: 2 }}
-              onClick={e => e.stopPropagation()}
-            />
-            <button
-              onClick={() => setLightbox(null)}
-              style={{
-                position: 'fixed', top: '1.5rem', right: '1.5rem',
-                background: 'transparent', border: 'none', color: 'white',
-                fontSize: '2rem', cursor: 'pointer', lineHeight: 1,
-              }}
-              aria-label="Close lightbox"
-            >×</button>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Bottom wave */}
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, lineHeight: 0 }}>
