@@ -24,8 +24,6 @@ export default function PhotoGallery() {
   const sliderRef = useRef(null);
   const jumping = useRef(false);
   const scrollTimer = useRef(null);
-  const autoTimer = useRef(null);
-  const isPaused = useRef(false);
 
   /* On mount: position to first real slide (index 1, after the clone) */
   useEffect(() => {
@@ -91,30 +89,6 @@ export default function PhotoGallery() {
     requestAnimationFrame(step);
   };
 
-  /* Autoplay: advance one slide every 4s, pause on touch */
-  useEffect(() => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    const next = () => {
-      if (isPaused.current || jumping.current) return;
-      const current = Math.round(el.scrollLeft / el.offsetWidth);
-      smoothScroll(el, (current + 1) * el.offsetWidth);
-    };
-
-    const pause = () => { isPaused.current = true; };
-    const resume = () => { isPaused.current = false; };
-
-    autoTimer.current = setInterval(next, 4000);
-    el.addEventListener('touchstart', pause, { passive: true });
-    el.addEventListener('touchend', resume, { passive: true });
-
-    return () => {
-      clearInterval(autoTimer.current);
-      el.removeEventListener('touchstart', pause);
-      el.removeEventListener('touchend', resume);
-    };
-  }, []);
 
   /* Dot tap: account for +1 offset due to leading clone */
   const goTo = (i) => {
