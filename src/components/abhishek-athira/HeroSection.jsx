@@ -273,8 +273,8 @@ export default function HeroSection() {
       return () => tl.kill();
     };
 
-    mm.add('(min-width: 769px)', () => buildTimeline(-110, false));  // desktop — visible from start
-    mm.add('(max-width: 768px)', () => buildTimeline(-50, true));   // mobile — slight overlap so names stay centered below each image
+    mm.add('(min-width: 769px)', () => buildTimeline(-120, false));  // desktop — visible from start
+    mm.add('(max-width: 768px)', () => buildTimeline(-55, true));   // mobile — slight overlap so names stay centered below each image
 
     return () => mm.revert();
   }, { scope: sectionRef });
