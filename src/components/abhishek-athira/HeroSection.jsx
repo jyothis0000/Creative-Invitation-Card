@@ -320,7 +320,7 @@ export default function HeroSection() {
         justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
-        padding: '3rem 1.5rem',
+        padding: '1rem 1.5rem 3rem',
       }}
     >
       {/* SVG wedding elements falling */}
@@ -437,7 +437,7 @@ export default function HeroSection() {
             fontStyle: 'italic',
             fontSize: 'clamp(1.1rem, 3vw, 1.55rem)',
             color: '#E8BAA3',
-            marginTop: '1.2rem',
+            // marginTop: '1.2rem',
             marginBottom: '0.5rem',
             fontWeight: 300,
             letterSpacing: '0.04em',
