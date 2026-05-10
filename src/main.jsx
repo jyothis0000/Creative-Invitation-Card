@@ -4,19 +4,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 
-const Dashboard       = lazy(() => import('./pages/dashboard/Dashboard.jsx'))
-const RohanAnanyaCard = lazy(() => import('./pages/RohanAnanyaCard.jsx'))
+const Dashboard = lazy(() => import('./pages/dashboard/Dashboard.jsx'))
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/rohan-ananya" element={
-          <Suspense fallback={<div style={{ minHeight: '100vh', background: '#FEF6EC' }} />}>
-            <RohanAnanyaCard />
-          </Suspense>
-        } />
+
         <Route path="/dashboard" element={
           <Suspense fallback={<div style={{ minHeight: '100vh', background: '#FAF7F2' }} />}>
             <Dashboard />
