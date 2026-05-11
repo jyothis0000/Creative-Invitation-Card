@@ -5,14 +5,14 @@ import img1 from '../../assets/img1.jpeg';
 import img2 from '../../assets/img2.jpeg';
 import img3 from '../../assets/img3.jpeg';
 import img4 from '../../assets/img4.jpeg';
-import img5 from '../../assets/img5.jpg';
+// import img5 from '../../assets/img5.jpg';
 
 const images = [
   { src: img1, alt: 'Photo 1' },
   { src: img4, alt: 'Photo 4' },
   { src: img2, alt: 'Photo 2' },
   { src: img3, alt: 'Photo 3' },
-  { src: img5, alt: 'Photo 5' },
+  // { src: img5, alt: 'Photo 5' },
 ];
 
 /* Clone last + first for infinite loop: [last, ...real, first] */
