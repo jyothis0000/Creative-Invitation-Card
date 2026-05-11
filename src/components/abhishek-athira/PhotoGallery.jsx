@@ -5,7 +5,9 @@ import img1 from '../../assets/img1.jpeg';
 import img2 from '../../assets/img2.jpeg';
 import img3 from '../../assets/img3.jpeg';
 import img4 from '../../assets/img4.jpeg';
-import img5 from '../../assets/img5.jpeg';
+import img5 from '../../assets/img5.jpg';
+import groomImg from '../../assets/groom6.png';
+import brideImg from '../../assets/bride6.png';
 
 const images = [
   { src: img1, alt: 'Photo 1' },
@@ -193,9 +195,9 @@ export default function PhotoGallery() {
 
       {/* Floating Instagram profile icons */}
       {[
-        { name: 'Abhishek', href: 'https://www.instagram.com/abhishek_raveendran?igsh=MWFqdGh3cjEwaWU4Mg==', side: { left: '3%' }, top: '52%', floatDelay: 0 },
-        { name: 'Athira',   href: 'https://www.instagram.com/athira_surendrn?igsh=b2xuM3R2aG42djBy',        side: { right: '3%' }, top: '40%', floatDelay: 0.8 },
-      ].map(({ name, href, side, top, floatDelay }) => (
+        { name: 'Abhishek', href: 'https://www.instagram.com/abhishek_raveendran?igsh=MWFqdGh3cjEwaWU4Mg==', img: groomImg, side: { left: '2%' }, top: '58%', floatDelay: 0 },
+        { name: 'Athira', href: 'https://www.instagram.com/athira_surendrn?igsh=b2xuM3R2aG42djBy', img: brideImg, side: { right: '2%' }, top: '45%', floatDelay: 0.8 },
+      ].map(({ name, href, img, side, top, floatDelay }) => (
         <motion.a
           key={name}
           href={href}
@@ -205,7 +207,6 @@ export default function PhotoGallery() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: floatDelay * 0.4 }}
-          animate={{ y: [0, -10, 0] }}
           style={{
             position: 'absolute',
             top,
@@ -214,46 +215,40 @@ export default function PhotoGallery() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '0.4rem',
+            gap: '0.3rem',
             textDecoration: 'none',
             cursor: 'pointer',
           }}
         >
-          {/* Instagram gradient ring */}
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
+          <motion.img
+            src={img}
+            alt={name}
+            animate={{ y: [0, -8, 0] }}
             transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut', delay: floatDelay }}
-          >
+            style={{ height: 80, width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.22))' }}
+          />
+          {/* Instagram icon badge */}
+          <div style={{
+            background: 'linear-gradient(45deg, #f09433, #dc2743, #bc1888)',
+            borderRadius: '50%',
+            padding: 2,
+            boxShadow: '0 2px 10px rgba(220,39,67,0.4)',
+          }}>
             <div style={{
-              background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+              width: 22, height: 22,
               borderRadius: '50%',
-              padding: 2.5,
-              boxShadow: '0 4px 16px rgba(220,39,67,0.4)',
+              background: '#1B3A2D',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}>
-              <div style={{
-                width: 46, height: 46,
-                borderRadius: '50%',
-                background: '#1B3A2D',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8C97A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="1" fill="#E8C97A" stroke="none" />
-                </svg>
-              </div>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E8C97A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="#E8C97A" stroke="none" />
+              </svg>
             </div>
-          </motion.div>
-          <span style={{
-            fontFamily: "'Lato', sans-serif",
-            fontSize: '0.58rem',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: 'rgba(232,201,122,0.85)',
-            fontWeight: 600,
-          }}>{name}</span>
+          </div>
         </motion.a>
       ))}
 
