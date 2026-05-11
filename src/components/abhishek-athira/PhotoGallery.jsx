@@ -196,7 +196,7 @@ export default function PhotoGallery() {
       {/* Floating Instagram profile icons */}
       {[
         { name: 'Abhishek', href: 'https://www.instagram.com/abhishek_raveendran?igsh=MWFqdGh3cjEwaWU4Mg==', img: groomImg, side: { left: '2%' }, top: '58%', floatDelay: 0 },
-        { name: 'Athira', href: 'https://www.instagram.com/athira_surendrn?igsh=b2xuM3R2aG42djBy', img: brideImg, side: { right: '2%' }, top: '45%', floatDelay: 0.8 },
+        { name: 'Athira', href: 'https://www.instagram.com/athira_surendrn?igsh=b2xuM3R2aG42djBy', img: brideImg, side: { right: '2%' }, top: '40%', floatDelay: 0.8 },
       ].map(({ name, href, img, side, top, floatDelay }) => (
         <motion.a
           key={name}
