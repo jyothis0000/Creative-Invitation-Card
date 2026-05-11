@@ -246,12 +246,12 @@ export default function HeroSection() {
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
-    const buildTimeline = (gap, offScreen = false) => {
+    const buildTimeline = (gap, end = '+=2000') => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: '+=2400',
+          end,
           scrub: 0.5,
           pin: true,
           pinSpacing: true,
@@ -259,25 +259,21 @@ export default function HeroSection() {
         },
       });
 
-      const groomEnd = { x: () => sectionRef.current.offsetWidth / 2 - groomRef.current.offsetWidth - gap, ease: 'power2.inOut', duration: 3 };
-      const brideEnd = { x: () => -(sectionRef.current.offsetWidth / 2 - brideRef.current.offsetWidth - gap), ease: 'power2.inOut', duration: 3 };
+      // Portraits slide in from edges — power2.out starts fast so animation is felt immediately
+      const groomEnd = { x: () => sectionRef.current.offsetWidth / 2 - groomRef.current.offsetWidth - gap, ease: 'power2.out', duration: 3 };
+      const brideEnd = { x: () => -(sectionRef.current.offsetWidth / 2 - brideRef.current.offsetWidth - gap), ease: 'power2.out', duration: 3 };
 
-      if (offScreen) {
-        tl.fromTo(groomRef.current, { x: () => -window.innerWidth }, groomEnd)
-          .fromTo(brideRef.current, { x: () => window.innerWidth }, brideEnd, '<');
-      } else {
-        tl.to(groomRef.current, groomEnd)
-          .to(brideRef.current, brideEnd, '<');
-      }
+      tl.to(groomRef.current, groomEnd, 0)
+        .to(brideRef.current, brideEnd, '<');
 
-      // Hold at center — nothing moves here, giving the user scroll distance to admire the portraits
+      // Hold at center so the user can see both portraits
       tl.to({}, { duration: 2.3 });
 
       return () => tl.kill();
     };
 
-    mm.add('(min-width: 769px)', () => buildTimeline(-110, false));  // desktop — visible from start
-    mm.add('(max-width: 768px)', () => buildTimeline(-50, true));   // mobile — slight overlap so names stay centered below each image
+    mm.add('(min-width: 769px)', () => buildTimeline(-110, '+=2000'));
+    mm.add('(max-width: 768px)', () => buildTimeline(-50, '+=1100')); // shorter scroll = animation starts immediately on mobile
 
     return () => mm.revert();
   }, { scope: sectionRef });
