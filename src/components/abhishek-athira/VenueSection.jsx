@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -9,7 +9,7 @@ import receptionMapImg from '../../assets/oasis_grand_cartoon_map_themed.png';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ─── Reception map with animated pin ───────────────────────────── */
-function ReceptionMap({ svgRef }) {
+function ReceptionMap({ svgRef, labelY, textY }) {
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
       <img
@@ -24,13 +24,9 @@ function ReceptionMap({ svgRef }) {
             <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
         </defs>
-        <g data-rm="pin" opacity="0">
-          <circle cx="200" cy="135" r="8" fill="#C9A84C" filter="url(#rm-glow)" />
-          <circle cx="200" cy="135" r="4" fill="#0B1810" />
-        </g>
         <g data-rm="label" opacity="0">
-          <rect x="142" y="105" width="116" height="13" rx="2" fill="#0B1810" fillOpacity="0.92" />
-          <text x="200" y="115" textAnchor="middle" fill="#E8C97A" fontSize="8" fontFamily="Playfair Display,serif">Oasis Grand, Thaliparamba</text>
+          <rect x="142" y={labelY} width="116" height="13" rx="2" fill="#0B1810" fillOpacity="0.92" />
+          <text x="200" y={textY} textAnchor="middle" fill="#E8C97A" fontSize="8" fontFamily="Playfair Display,serif">Oasis Grand, Thaliparamba</text>
         </g>
       </svg>
     </div>
@@ -57,6 +53,13 @@ function CompassRose() {
 function ReceptionVenueCard() {
   const svgRef = useRef(null);
   const cardRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
   useGSAP(() => {
     const svg = svgRef.current;
@@ -90,7 +93,7 @@ function ReceptionVenueCard() {
     >
       {/* Map */}
       <div style={{ position: 'relative', height: 310 }}>
-        <ReceptionMap svgRef={svgRef} />
+        <ReceptionMap svgRef={svgRef} labelY={isMobile ? 105 : 25} textY={isMobile ? 115 : 35} />
 
         {/* Badge */}
         <div style={{
