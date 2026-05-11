@@ -8,6 +8,7 @@ const EventsSection = lazy(() => import('../components/abhishek-athira/EventsSec
 const PhotoGallery = lazy(() => import('../components/abhishek-athira/PhotoGallery'));
 const RSVPSection = lazy(() => import('../components/abhishek-athira/RSVPSection'));
 const VenueSection = lazy(() => import('../components/abhishek-athira/VenueSection'));
+const ContactSection = lazy(() => import('../components/abhishek-athira/ContactSection'));
 const FooterSection = lazy(() => import('../components/abhishek-athira/FooterSection'));
 
 function SectionFallback() {
@@ -69,6 +70,10 @@ export default function AbhishekAthiraCard() {
 
       <Suspense fallback={<SectionFallback />}>
         <VenueSection />
+      </Suspense>
+
+      <Suspense fallback={<SectionFallback />}>
+        <ContactSection />
       </Suspense>
 
       <Suspense fallback={<SectionFallback />}>
