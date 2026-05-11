@@ -4,8 +4,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import FloralDivider from './FloralDivider';
-import brideImg from '../../assets/bride3.png';
-import groomImg from '../../assets/groom.png';
+import brideImg from '../../assets/bride6.png';
+import groomImg from '../../assets/groom6.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -230,7 +230,10 @@ const Portrait = forwardRef(function Portrait({ src, name, side, zIndex = 3 }, r
       >
         <img src={src} alt={name} className="aa-portrait-img" />
       </motion.div>
-      <span className="aa-portrait-label">{name}</span>
+      <span
+        className="aa-portrait-label"
+        style={{ transform: side === 'left' ? 'translateX(-0.5rem)' : 'translateX(0.5rem)' }}
+      >{name}</span>
     </div>
   );
 });
@@ -273,8 +276,8 @@ export default function HeroSection() {
       return () => tl.kill();
     };
 
-    mm.add('(min-width: 769px)', () => buildTimeline(-120, false));  // desktop — visible from start
-    mm.add('(max-width: 768px)', () => buildTimeline(-55, true));   // mobile — slight overlap so names stay centered below each image
+    mm.add('(min-width: 769px)', () => buildTimeline(-110, false));  // desktop — visible from start
+    mm.add('(max-width: 768px)', () => buildTimeline(-50, true));   // mobile — slight overlap so names stay centered below each image
 
     return () => mm.revert();
   }, { scope: sectionRef });

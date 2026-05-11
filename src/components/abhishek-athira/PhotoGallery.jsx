@@ -191,6 +191,72 @@ export default function PhotoGallery() {
         </motion.p>
       </div>
 
+      {/* Floating Instagram profile icons */}
+      {[
+        { name: 'Abhishek', href: 'https://www.instagram.com/abhishek_raveendran?igsh=MWFqdGh3cjEwaWU4Mg==', side: { left: '3%' }, top: '52%', floatDelay: 0 },
+        { name: 'Athira',   href: 'https://www.instagram.com/athira_surendrn?igsh=b2xuM3R2aG42djBy',        side: { right: '3%' }, top: '40%', floatDelay: 0.8 },
+      ].map(({ name, href, side, top, floatDelay }) => (
+        <motion.a
+          key={name}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, scale: 0.7 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: floatDelay * 0.4 }}
+          animate={{ y: [0, -10, 0] }}
+          style={{
+            position: 'absolute',
+            top,
+            ...side,
+            zIndex: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '0.4rem',
+            textDecoration: 'none',
+            cursor: 'pointer',
+          }}
+        >
+          {/* Instagram gradient ring */}
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut', delay: floatDelay }}
+          >
+            <div style={{
+              background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+              borderRadius: '50%',
+              padding: 2.5,
+              boxShadow: '0 4px 16px rgba(220,39,67,0.4)',
+            }}>
+              <div style={{
+                width: 46, height: 46,
+                borderRadius: '50%',
+                background: '#1B3A2D',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8C97A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="#E8C97A" stroke="none" />
+                </svg>
+              </div>
+            </div>
+          </motion.div>
+          <span style={{
+            fontFamily: "'Lato', sans-serif",
+            fontSize: '0.58rem',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'rgba(232,201,122,0.85)',
+            fontWeight: 600,
+          }}>{name}</span>
+        </motion.a>
+      ))}
+
       {/* Bottom wave */}
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, lineHeight: 0 }}>
         <svg viewBox="0 0 1440 40" preserveAspectRatio="none" style={{ display: 'block', width: '100%' }}>
