@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import getBGM from '../../utils/audio';
-import cardVideo from '../../assets/card.mp4';
+import cardVideo from '../../assets/envlope.mp4';
 
 const isDesktop = () => window.innerWidth >= 768;
 
@@ -128,7 +128,7 @@ export default function VideoIntro({ onComplete }) {
           transition={{ delay: 1 }}
           style={{
             position: 'absolute',
-            top: '75%',
+            top: '70%',
             left: 0, right: 0,
             textAlign: 'center',
             pointerEvents: 'none',
@@ -149,7 +149,8 @@ export default function VideoIntro({ onComplete }) {
                 style={{
                   color: '#c77a12',
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: 'clamp(1rem, 3.5vw, 1.3rem)',
+                  fontSize: '18px',
+                  fontWeight: 'bold',
                   letterSpacing: '0.1em',
                   textShadow: '0 2px 10px rgba(0,0,0,0.5)',
                   margin: 0,
