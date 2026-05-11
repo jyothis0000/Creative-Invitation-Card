@@ -149,7 +149,7 @@ export default function FooterSection() {
         color: '#c9a84ca6',
         letterSpacing: '0.15em',
       }}>
-        Designed with ❤️ by
+        designed with ❤️ by
         <a href="https://digitalbuddha.in/" style={{ color: '#c9a84ca6', textDecoration: 'none' }}>&nbsp;digitalbuddha</a>
       </p>
     </footer>

@@ -24,7 +24,7 @@ const events = [
     ),
     time: '6:15 PM',
     name: 'Bride & Groom Entry',
-    location: 'Main Stage',
+    location: 'The Grand Entrance',
     desc: 'Abhishek and Athira make their grand entrance together, welcomed by cheers, music, and a shower of flower petals from family and friends.',
   },
   {
@@ -37,7 +37,7 @@ const events = [
     ),
     time: '7:15 PM',
     name: 'Dance Performances',
-    location: 'Main Stage',
+    location: 'The Celebration Stage',
     desc: 'Family and friends take the stage for an hour of joyful dance performances — from classic Malayalam film songs to modern beats celebrating the couple.',
   },
   {
@@ -48,7 +48,7 @@ const events = [
     ),
     time: '8:15 PM',
     name: 'Games & Entertainment',
-    location: 'Main Stage',
+    location: 'The Celebration Floor',
     desc: 'An hour of fun-filled games and interactive entertainment for all guests — bringing laughter, friendly competition, and unforgettable memories.',
   },
   // {
