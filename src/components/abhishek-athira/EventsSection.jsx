@@ -171,7 +171,7 @@ export default function EventsSection() {
                     }}>
                       {ev.name}
                     </h3>
-                    <p style={{
+                    {/* <p style={{
                       fontFamily: "'Lato', sans-serif",
                       fontSize: '0.7rem',
                       letterSpacing: '0.12em',
@@ -180,7 +180,7 @@ export default function EventsSection() {
                       marginBottom: '0.45rem',
                     }}>
                       {ev.location}
-                    </p>
+                    </p> */}
                     <p style={{
                       fontSize: '0.88rem',
                       lineHeight: 1.7,
