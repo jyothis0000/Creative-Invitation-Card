@@ -283,7 +283,11 @@ export default function HeroSection() {
      GSAP calculate the wrong end-x on first visit. Image load events give
      us the earliest reliable moment to re-measure. */
   useEffect(() => {
-    const doRefresh = () => ScrollTrigger.refresh();
+    const doRefresh = () => {
+      ScrollTrigger.refresh();
+      // Second refresh after paint to ensure browser has fully laid out
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    };
     const imgs = document.querySelectorAll('.aa-portrait-img');
     let pending = 0;
 
@@ -295,14 +299,14 @@ export default function HeroSection() {
       }
     });
 
-    // All images already cached — refresh immediately after paint
+    // All images already cached — refresh after two frames
     if (pending === 0) {
-      const raf = requestAnimationFrame(doRefresh);
-      return () => cancelAnimationFrame(raf);
+      requestAnimationFrame(() => requestAnimationFrame(doRefresh));
+      return;
     }
 
-    // Safety-net: if a load event somehow never fires, refresh after 800 ms
-    const fallback = setTimeout(doRefresh, 800);
+    // Safety-net: aggressive fallback for slow/unreliable load events
+    const fallback = setTimeout(doRefresh, 1200);
     return () => clearTimeout(fallback);
   }, []);
 

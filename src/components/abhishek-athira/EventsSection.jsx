@@ -30,41 +30,58 @@ const events = [
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+        <path d="M3.5 21h17" />
+        <path d="M12 12v3m-4-3v3m8-3v3" />
+      </svg>
+    ),
+    time: '6:45 PM',
+    name: 'Cake Cutting Ceremony',
+    location: 'The Grand Stage',
+    desc: 'A sweet moment as Abhishek and Athira cut their wedding cake together, celebrating their new chapter with the blessings of all loved ones.',
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+        <circle cx="12" cy="6" r="2" />
+      </svg>
+    ),
+    time: '7:00 PM',
+    name: 'Dinner Opens',
+    location: 'The Dining Hall',
+    desc: 'Join us for an exquisite culinary experience. Enjoy a curated menu of authentic flavors and delicacies as you celebrate with family and friends.',
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M9 18V5l12-2v13" />
         <circle cx="6" cy="18" r="3" />
         <circle cx="18" cy="16" r="3" />
       </svg>
     ),
-    time: '7:15 PM',
-    name: 'Dance Performances',
+    time: '7:30 PM',
+    name: 'Dance & Entertainment',
     location: 'The Celebration Stage',
-    desc: 'Family and friends take the stage for an hour of joyful dance performances — from classic Malayalam film songs to modern beats celebrating the couple.',
+    desc: 'Family and friends take the stage for joyful performances — from classic songs to modern beats celebrating Abhishek and Athira.',
   },
   {
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        <circle cx="5.5" cy="19.5" r="2.5" />
+        <circle cx="18.5" cy="19.5" r="2.5" />
+        <path d="M7 19.5h11.5" />
+        <path d="M12 12v7.5" />
+        <path d="M9 2h6a2 2 0 0 1 2 2v8H7V4a2 2 0 0 1 2-2z" />
       </svg>
     ),
-    time: '8:15 PM',
-    name: 'Games & Entertainment',
-    location: 'The Celebration Floor',
-    desc: 'An hour of fun-filled games and interactive entertainment for all guests — bringing laughter, friendly competition, and unforgettable memories.',
+    time: '8:30 PM',
+    name: 'Open Dance Floor / DJ Night',
+    location: 'The Main Hall',
+    desc: 'Free dance session with guests, group photos & candid moments. The night comes alive as everyone joins in for a celebration of music, laughter, and unforgettable memories!',
   },
-  // {
-  //   icon: (
-  //     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-  //       <path d="M9 18V5l12-2v13" />
-  //       <circle cx="6" cy="18" r="3" />
-  //       <circle cx="18" cy="16" r="3" />
-  //       <path d="M9 9l12-2" />
-  //     </svg>
-  //   ),
-  //   time: '9:30 PM',
-  //   name: 'DJ Party',
-  //   location: 'Main Hall',
-  //   desc: 'The night comes alive! Dance the night away to the hottest tracks spun by our DJ. Let loose, celebrate, and make memories on the dance floor.',
-  // },
 ];
 
 export default function EventsSection() {
